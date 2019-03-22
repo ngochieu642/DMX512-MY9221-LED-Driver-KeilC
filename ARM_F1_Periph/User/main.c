@@ -38,6 +38,9 @@ int main(void){
 	NVIC_Configuration(); /*NVIC MUST BE ABOVE TIM*/
 	TIM_Configuration();
 	
+	ClearLED();
+	TestLED_ALL(0);
+	
 	while(1){
 		/*Delay*/
 		msDelay(500);
