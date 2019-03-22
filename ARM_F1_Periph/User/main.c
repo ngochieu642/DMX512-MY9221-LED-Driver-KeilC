@@ -35,34 +35,10 @@ int main(void){
 	NVIC_Configuration(); /*NVIC MUST BE ABOVE TIM*/
 	TIM_Configuration();
 	
-	ClearLED();
-	//TestLED(0);
-	TestLED_ALL(1);
-	//SetColorWithCode(0,0x0f0f0f);
-	
 	while(1){
 		/*Delay*/
 		msDelay(500);
-		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));		
-		//int channelNumber = ChoseFlashPosition(12,1);
-		//ColorRun(0x010101,0x00000f,1);
-		
-		uint8_t buffer[12]={3,2,1,6,5,4,9,8,7,12,11,10};
-//		uint64_t RGB_BackGround=0x010101,RGB_RunningColor=0x00000f;
-		uint16_t frequency = 7;
-//		float timeDelay = 1000/frequency;
-//		for (int i=0;i<12;i++)
-//		{
-//			int channelNumber = buffer[i];
-//			msDelay((int)timeDelay);
-//			Sparkle12Channel(RGB_BackGround,channelNumber,RGB_RunningColor);
-//		}
-	
-		for(int i=0;i<12;i++){
-		Sparkle12Channel(0x010101,buffer[i],0x010000);
-		msDelay(200);
-		}
-
+		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));	
 	}
 }
 
