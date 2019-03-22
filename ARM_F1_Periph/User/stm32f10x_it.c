@@ -141,7 +141,7 @@ void SysTick_Handler(void)
 void USART1_IRQHandler(void){
 	uint16_t data;
 	/*Break condition detected*/
-	if(USART_GetITStatus(USART1,USART_IT_FE)==SET)
+	if(USART_GetITStatus(USART1,USART_IT_FE)!=RESET)
 	{
 		/*set flag to True*/
 		breakCondition=true;
@@ -167,6 +167,8 @@ void USART1_IRQHandler(void){
 			dmx_receive[dmx_counter++]=data;
 		}else{
 			dmx_counter=0;
+			breakCondition=false;
+			startCode=false;
 		}
 		
 	}

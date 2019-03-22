@@ -12,9 +12,6 @@ PUTCHAR_PROTOTYPE
 	return ch;
 }
 
-#define PORT_LED 	GPIOA
-#define DI		GPIO_Pin_7
-#define DCKI	GPIO_Pin_5
 
 extern void SysTick_DelayUs(uint32_t nTime);
 extern void SysTick_DelayMs(uint32_t nTime);
@@ -28,7 +25,7 @@ uint8_t buffer[12] ={	0x01,0x00,0x01,		//Channel 3
 											0x00,0x00,0x00}; /*from left to right is RGB, the order we are using is BGR*/
 
 extern uint8_t dmx_receive[512];
-											
+														
 int main(void){
 	/*Config function*/
 	RCC_Configuration();
@@ -39,12 +36,13 @@ int main(void){
 	TIM_Configuration();
 	
 	ClearLED();
-	TestLED_ALL(0);
+	TestLED_ALL(1);
 	
 	while(1){
 		/*Delay*/
-		msDelay(500);
+		msDelay(109);
 		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));	
+		SendSPI();
 	}
 }
 
@@ -280,5 +278,17 @@ void TestLED_ALL(int myCode){
 			TestLED(4);
 			break;
 	}
+}
+/*Send SPI*/
+void SendSPI(void){
+		uint8_t buff1[12] ={	dmx_receive[0],dmx_receive[1],dmx_receive[2], 	//b	3
+													dmx_receive[3],dmx_receive[4],dmx_receive[5],		//g 2
+													dmx_receive[6],dmx_receive[7],dmx_receive[8], 	//r 1
+													0x00,0x00,0x00};
+		beginWrite();
+		for(int i=0;i<12;i++){
+		write16(buff1[i]);
+		}
+		endWrite();
 }
 	

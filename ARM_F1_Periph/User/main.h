@@ -12,6 +12,9 @@
 #include <color.h>
 #include <colorRun.h>
 
+#define PORT_LED 	GPIOA
+#define DI		GPIO_Pin_7
+#define DCKI	GPIO_Pin_5
 /*Systick*/
 typedef struct
 {
@@ -46,3 +49,6 @@ void writeSync(void);
 void ClearLED(void);
 void TestLED(int myCase);
 void TestLED_ALL(int Code);
+
+/*Send SPI*/
+void SendSPI(void);
