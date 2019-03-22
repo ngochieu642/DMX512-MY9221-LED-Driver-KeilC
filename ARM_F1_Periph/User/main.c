@@ -27,6 +27,8 @@ uint8_t buffer[12] ={	0x01,0x00,0x01,		//Channel 3
 											0x00,0x00,0x01, 	//Channel 1
 											0x00,0x00,0x00}; /*from left to right is RGB, the order we are using is BGR*/
 
+extern uint8_t dmx_receive[512];
+											
 int main(void){
 	/*Config function*/
 	RCC_Configuration();
