@@ -26,6 +26,7 @@ void RCC_Configuration(void);
 void GPIO_Configuration(void);
 void TIM_Configuration(void);
 void NVIC_Configuration(void);
+void UART_Configuration(void);
 
 /*Delay*/
 void usDelay(uint32_t nTime);
