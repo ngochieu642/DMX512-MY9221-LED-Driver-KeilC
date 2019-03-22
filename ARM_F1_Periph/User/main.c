@@ -36,8 +36,7 @@ int main(void){
 	TIM_Configuration();
 	
 	ClearLED();
-	//TestLED(0);
-	TestLED_ALL(1);
+	TestLED_ALL(0);
 	//SetColorWithCode(0,0x0f0f0f);
 	
 	while(1){
@@ -58,10 +57,10 @@ int main(void){
 //			Sparkle12Channel(RGB_BackGround,channelNumber,RGB_RunningColor);
 //		}
 	
-		for(int i=0;i<12;i++){
-		Sparkle12Channel(0x010101,buffer[i],0x010000);
-		msDelay(200);
-		}
+//		for(int i=0;i<12;i++){
+		Sparkle12Channel(0x010101,12,0x010000);
+//		msDelay(2000);
+//		}
 
 	}
 }
