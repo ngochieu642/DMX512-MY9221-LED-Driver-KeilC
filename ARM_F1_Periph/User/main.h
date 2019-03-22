@@ -6,6 +6,7 @@
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_tim.h"
 #include <stdbool.h>
+#include "stm32f10x_usart.h"
 
 #include <sparkle.h>
 #include <color.h>
