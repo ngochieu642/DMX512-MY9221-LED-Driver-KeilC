@@ -32,6 +32,7 @@ int main(void){
 	RCC_Configuration();
 	SysTick_Configuration();
 	GPIO_Configuration();
+	UART_Configuration();
 	NVIC_Configuration(); /*NVIC MUST BE ABOVE TIM*/
 	TIM_Configuration();
 	
@@ -55,6 +56,9 @@ void RCC_Configuration(void){
 	
 	/*Use Timer 2 as tim base*/
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2,ENABLE);
+	
+	/*UART1*/
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);
 }
 void GPIO_Configuration(void){
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -67,6 +71,17 @@ void GPIO_Configuration(void){
 	/*PA5 and PA7*/
 	GPIO_InitStructure.GPIO_Pin = DI | DCKI;
 	GPIO_Init(PORT_LED,&GPIO_InitStructure);
+	
+	/*PA9-Tx PA10-Rx*/
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_InitStructure.GPIO_Speed =GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA,&GPIO_InitStructure);
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_Init(GPIOA,&GPIO_InitStructure);
+	
 }
 void SysTick_Configuration(void){
   if (SysTick_Config(SystemCoreClock/1000) ) //1000000:us 1000:ms
@@ -102,6 +117,33 @@ void NVIC_Configuration(void){
 	/*Enable TIM2 interrupt*/
 	NVIC_EnableIRQ(TIM2_IRQn);
 	NVIC_EnableIRQ(TIM3_IRQn);
+	
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority=0;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=1;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+}
+
+void UART_Configuration(void){
+	USART_InitTypeDef USART_InitStructure;
+	
+	USART_InitStructure.USART_BaudRate = 115200;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	USART_InitStructure.USART_Parity = USART_Parity_No;
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART_Init(USART1,&USART_InitStructure);
+	
+	/*Clear Receive Flag*/
+	USART_ClearFlag(USART1,USART_IT_RXNE);
+	
+	/*Enable interrupt when receive*/
+	USART_ITConfig(USART1,USART_IT_RXNE,ENABLE);
+	
+	/*Enable UART*/
+	USART_Cmd(USART1,ENABLE);
 }
 /*Delay*/
 void usDelay(uint32_t nTime){

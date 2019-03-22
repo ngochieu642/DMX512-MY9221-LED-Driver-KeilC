@@ -135,6 +135,14 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
 }
+void USART1_IRQHandler(void){
+	uint16_t data;
+	if(USART_GetITStatus(USART1,USART_IT_RXNE)!=RESET)
+	{
+		GPIO_WriteBit(GPIOC,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOC,GPIO_Pin_13));
+		data = USART_ReceiveData(USART1);
+	}
+}
 
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */
