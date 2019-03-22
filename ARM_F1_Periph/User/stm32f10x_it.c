@@ -139,39 +139,39 @@ void SysTick_Handler(void)
 {
 }
 void USART1_IRQHandler(void){
-	uint16_t data;
-	/*Break condition detected*/
-	if(USART_GetITStatus(USART1,USART_IT_FE)!=RESET)
-	{
+		
+		/*Break condition detected*/
+		if(USART_GetITStatus(USART1,USART_IT_FE)!=RESET)
+		{
 		/*set flag to True*/
 		breakCondition=true;
-	}
-	
-	/*
-	If already in break condition, and get the first byte of data arrive
-	The first byte received correctly is interpreted as the Start code
-	*/
-	if(breakCondition && !USART_GetITStatus(USART1,USART_IT_FE)){
+		}
+
+		/*
+		If already in break condition, and get the first byte of data arrive
+		The first byte received correctly is interpreted as the Start code
+		*/
+		if(breakCondition && !USART_GetITStatus(USART1,USART_IT_FE)){
 		startCode=true;
-	}
-	
-	/*
-	a loop to capture up to 512 bytes
-	stores them sequentially in the receiver buffer
-	*/
-	if(breakCondition && startCode){
-		uint8_t data;
-		
-		if(dmx_counter<512){
+		}
+
+		/*
+		a loop to capture up to 512 bytes
+		stores them sequentially in the receiver buffer
+		*/
+		if(breakCondition && startCode){
+			uint8_t data;
+
+			if(dmx_counter<512){
 			data = USART_ReceiveData(USART1);
 			dmx_receive[dmx_counter++]=data;
-		}else{
+			}else{
 			dmx_counter=0;
 			breakCondition=false;
 			startCode=false;
+			}
 		}
-		
-	}
+
 }
 
 /******************************************************************************/

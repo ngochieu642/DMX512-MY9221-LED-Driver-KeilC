@@ -15,6 +15,7 @@ PUTCHAR_PROTOTYPE
 
 extern void SysTick_DelayUs(uint32_t nTime);
 extern void SysTick_DelayMs(uint32_t nTime);
+extern bool breakCondition;
 
 SysTick_typedef systick={.Systick_Counter=0};
 
@@ -40,7 +41,7 @@ int main(void){
 	
 	while(1){
 		/*Delay*/
-		msDelay(109);
+		msDelay(100);
 		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));	
 		SendSPI();
 	}
@@ -75,7 +76,7 @@ void GPIO_Configuration(void){
 	GPIO_InitStructure.GPIO_Pin = DI | DCKI;
 	GPIO_Init(PORT_LED,&GPIO_InitStructure);
 	
-	/*PA9-Tx PA10-Rx*/
+	/*PA9-Rx PA10-Tx*/
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
 	GPIO_InitStructure.GPIO_Speed =GPIO_Speed_50MHz;
