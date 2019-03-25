@@ -152,7 +152,7 @@ void USART2_IRQHandler(void){
 		
 	}
 		
-	//if(USART_GetITStatus(USART2,USART_IT_RXNE)==SET){/*Receive not Empty is True*/
+//	if(USART_GetITStatus(USART2,USART_IT_RXNE)==SET){/*Receive not Empty is True*/
 		if(breakCondition && USART_GetITStatus(USART2,USART_FLAG_FE)!=SET){/*If in break condition and detect first frame recevied correctly*/
 			startFrame=true;
 			
@@ -170,7 +170,7 @@ void USART2_IRQHandler(void){
 				GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
 			}
 		}			
-	//}
+//	}
 }
 
 

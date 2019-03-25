@@ -27,12 +27,12 @@ int main(void){
 	NVIC_Configuration();
 	TIM_Configuration();
 	
+	msDelay(1000);
+	ClearLED();
 	
 	while(1){
-		msDelay(1000);
 //		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
 		//GPIO_WriteBit(GPIOB,GPIO_Pin_13,1);
-		
 	}
 }
 
@@ -209,10 +209,18 @@ void beginWrite(void){/*write 16 command bit*/
 void endWrite(void){
 	trigger_latch();
 }
+void ClearLED(void){
+		uint8_t myBuff[12] ={0x000,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, 0x00,0x00,0x00}; 
+		beginWrite();
+		for(int i=0;i<12;i++){
+			write16(myBuff[i]);
+		}
+		endWrite();
+}
 void SendSPI(void){
-		uint8_t buff1[12] ={	dmx_receive[0],dmx_receive[1],dmx_receive[2], 	//b	3
-													dmx_receive[3],dmx_receive[4],dmx_receive[5],		//g 2
-													dmx_receive[6],dmx_receive[7],dmx_receive[8], 	//r 1
+		uint8_t buff1[12] ={	dmx_receive[0],dmx_receive[1],dmx_receive[2], 	
+													dmx_receive[3],dmx_receive[4],dmx_receive[5],		
+													dmx_receive[6],dmx_receive[7],dmx_receive[8],
 													0x00,0x00,0x00};
 		beginWrite();
 		for(int i=0;i<12;i++){
