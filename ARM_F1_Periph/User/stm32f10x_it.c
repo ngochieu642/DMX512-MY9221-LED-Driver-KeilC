@@ -139,32 +139,41 @@ void SysTick_Handler(void)
 {
 }
 void USART1_IRQHandler(void){
+	GPIO_WriteBit(GPIOB,GPIO_Pin_13,1);
+}
+void USART2_IRQHandler(void){
 	
-	if(USART_GetITStatus(USART1,USART_IT_RXNE)==SET){/*Receive not Empty is True*/
+	FlagStatus FlagFrameError = USART_GetFlagStatus(USART2, USART_FLAG_FE);
+	uint8_t Data = USART_ReceiveData(USART2);
+	GPIO_WriteBit(GPIOB,GPIO_Pin_13,1);
 		
-		FlagStatus FlagFrameError = USART_GetFlagStatus(USART1, USART_FLAG_FE);
-		uint8_t Data = USART_ReceiveData(USART1);
+	if(FlagFrameError == SET && Data == 1){
+		//Break condition recognized
+		breakCondition = true;
+	}
 		
-		if(FlagFrameError == SET && Data == 0){
-			//Break condition recognized
-			breakCondition = true;
-		}
-		if(breakCondition && USART_GetITStatus(USART1,USART_FLAG_FE)==RESET){/*If in break condition and detect first frame recevied correctly*/
+	if(USART_GetITStatus(USART2,USART_IT_RXNE)==SET){/*Receive not Empty is True*/
+		
+	
+		if(breakCondition && USART_GetITStatus(USART2,USART_FLAG_FE)==RESET){/*If in break condition and detect first frame recevied correctly*/
 			startFrame=true;
 		}
 		if(startFrame){/*Receive 512 Bytes*/
 			if(dmx_counter<512){/*data to dmx_receive*/
-				dmx_receive[dmx_counter++]=USART_ReceiveData(USART1);
+				dmx_receive[dmx_counter++]=USART_ReceiveData(USART2);
 			}
 			else{/*reset breakCondition, startFrame*/
 				breakCondition=false;
 				startFrame=false;
 				dmx_counter=0;
-				GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
+//				GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
+				
 			}
 		}			
 	}
 }
+
+
 
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */

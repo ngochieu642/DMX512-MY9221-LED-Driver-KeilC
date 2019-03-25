@@ -22,13 +22,17 @@ int main(void){
 	RCC_Configuration();
 	SysTick_Configuration();
 	GPIO_Configuration();
+	
 	UART_Configuration();
 	NVIC_Configuration();
 	TIM_Configuration();
 	
+	
 	while(1){
 		msDelay(1000);
 //		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
+		//GPIO_WriteBit(GPIOB,GPIO_Pin_13,1);
+		
 	}
 }
 
@@ -48,6 +52,9 @@ void RCC_Configuration(void){
 	
 	/*UART1*/
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);
+	
+	/*UART2*/
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2,ENABLE);
 }
 void GPIO_Configuration(void){
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -71,6 +78,10 @@ void GPIO_Configuration(void){
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 	GPIO_Init(GPIOA,&GPIO_InitStructure);
 	
+	/*PA3 as Rx*/
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_Init(GPIOA,&GPIO_InitStructure);
 }
 void SysTick_Configuration(void){
   if (SysTick_Config(SystemCoreClock/1000) ) //1000000:us 1000:ms
@@ -112,27 +123,46 @@ void NVIC_Configuration(void){
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
+	
+	NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority=1;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=1;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
 }
 
 void UART_Configuration(void){
 	USART_InitTypeDef USART_InitStructure;
 	
+	/*UART1*/
 	USART_InitStructure.USART_BaudRate = 250000;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
 	USART_InitStructure.USART_StopBits = USART_StopBits_2;
 	USART_InitStructure.USART_Parity = USART_Parity_No;
 	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Rx;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 	USART_Init(USART1,&USART_InitStructure);
+	
+	/*UART2*/
+	USART_InitStructure.USART_BaudRate = 250000;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_2;
+	USART_InitStructure.USART_Parity = USART_Parity_No;
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART_Init(USART2,&USART_InitStructure);
 	
 	/*Clear Receive Flag*/
 	USART_ClearFlag(USART1,USART_IT_RXNE);
+	USART_ClearFlag(USART2,USART_IT_RXNE);
 	
 	/*Enable interrupt when receive*/
 	USART_ITConfig(USART1,USART_IT_RXNE,ENABLE);
+	USART_ITConfig(USART2,USART_IT_RXNE,ENABLE);
 	
 	/*Enable UART*/
 	USART_Cmd(USART1,ENABLE);
+	USART_Cmd(USART2,ENABLE);
 }
 /*Delay*/
 void usDelay(uint32_t nTime){
