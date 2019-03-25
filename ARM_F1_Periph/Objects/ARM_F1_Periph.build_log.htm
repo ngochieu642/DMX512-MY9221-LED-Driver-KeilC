@@ -22,55 +22,11 @@ Dialog DLL:      TARMSTM.DLL V1.66.0.0
  
 <h2>Project:</h2>
 F:\Work\SmartTec\LED_RGB\TestFunction\ARM_F1_Periph\ARM_F1_Periph.uvprojx
-Project File Date:  03/18/2019
+Project File Date:  03/25/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'F:\Keil_v5\ARM\ARMCC\Bin'
-Rebuild target 'ARM_F1_Periph'
-assembling startup_stm32f10x_md.s...
-compiling stm32f10x_it.c...
-.\User\sparkle.h(8): warning:  #1-D: last line of file ends without a newline
-  void Sparkle12Channel(uint64_t RGB_Background, int channelSpark, uint64_t RGBsparkColor);
-.\User\sparkle.h(8): warning:  #1-D: last line of file ends without a newline
-  void Sparkle12Channel(uint64_t RGB_Background, int channelSpark, uint64_t RGBsparkColor);
-.\User\colorRun.h(7): warning:  #1-D: last line of file ends without a newline
-  void ColorRun(uint64_t BackGround, uint64_t RunningColor, uint16_t frequency);
-User\stm32f10x_it.c: 3 warnings, 0 errors
-compiling misc.c...
-compiling colorRun.c...
-User\sparkle.h(8): warning:  #1-D: last line of file ends without a newline
-  void Sparkle12Channel(uint64_t RGB_Background, int channelSpark, uint64_t RGBsparkColor);
-User\colorRun.h(7): warning:  #1-D: last line of file ends without a newline
-  void ColorRun(uint64_t BackGround, uint64_t RunningColor, uint16_t frequency);
-.\User\sparkle.h(8): warning:  #1-D: last line of file ends without a newline
-  void Sparkle12Channel(uint64_t RGB_Background, int channelSpark, uint64_t RGBsparkColor);
-.\User\sparkle.h(8): warning:  #1-D: last line of file ends without a newline
-  void Sparkle12Channel(uint64_t RGB_Background, int channelSpark, uint64_t RGBsparkColor);
-.\User\colorRun.h(7): warning:  #1-D: last line of file ends without a newline
-  void ColorRun(uint64_t BackGround, uint64_t RunningColor, uint16_t frequency);
-User\colorRun.c(21): warning:  #1-D: last line of file ends without a newline
-  }
-User\colorRun.c: 6 warnings, 0 errors
-compiling color.c...
-.\User\sparkle.h(8): warning:  #1-D: last line of file ends without a newline
-  void Sparkle12Channel(uint64_t RGB_Background, int channelSpark, uint64_t RGBsparkColor);
-.\User\sparkle.h(8): warning:  #1-D: last line of file ends without a newline
-  void Sparkle12Channel(uint64_t RGB_Background, int channelSpark, uint64_t RGBsparkColor);
-.\User\colorRun.h(7): warning:  #1-D: last line of file ends without a newline
-  void ColorRun(uint64_t BackGround, uint64_t RunningColor, uint16_t frequency);
-User\color.c: 3 warnings, 0 errors
-compiling sparkle.c...
-User\sparkle.h(8): warning:  #1-D: last line of file ends without a newline
-  void Sparkle12Channel(uint64_t RGB_Background, int channelSpark, uint64_t RGBsparkColor);
-.\User\sparkle.h(8): warning:  #1-D: last line of file ends without a newline
-  void Sparkle12Channel(uint64_t RGB_Background, int channelSpark, uint64_t RGBsparkColor);
-.\User\colorRun.h(7): warning:  #1-D: last line of file ends without a newline
-  void ColorRun(uint64_t BackGround, uint64_t RunningColor, uint16_t frequency);
-User\sparkle.c(226): warning:  #1-D: last line of file ends without a newline
-  };
-User\sparkle.c(125): warning:  #177-D: variable "buffGR"  was declared but never referenced
-  	uint8_t buffGR[12] ={	BLUE,GREEN,RED,		
-User\sparkle.c: 6 warnings, 0 errors
+Build target 'ARM_F1_Periph'
 compiling main.c...
 .\User\sparkle.h(8): warning:  #1-D: last line of file ends without a newline
   void Sparkle12Channel(uint64_t RGB_Background, int channelSpark, uint64_t RGBsparkColor);
@@ -81,47 +37,24 @@ compiling main.c...
 User\main.c(45): warning:  #188-D: enumerated type mixed with another type
   		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));		
 User\main.c(49): warning:  #177-D: variable "buffer"  was declared but never referenced
-  		uint8_t buffer[12]={3,2,1,6,5,4,9,8,7,12,11,10};
+  		uint8_t buffer[12]={3,2,1,6,5,4,9,8,7,12,11,10}; /*From right to Left*/
 User\main.c(51): warning:  #177-D: variable "frequency"  was declared but never referenced
   		uint16_t frequency = 7;
-User\main.c(124): warning:  #177-D: variable "NVIC_InitStructure"  was declared but never referenced
+User\main.c(127): warning:  #177-D: variable "NVIC_InitStructure"  was declared but never referenced
   	NVIC_InitTypeDef NVIC_InitStructure;
-User\main.c(152): warning:  #188-D: enumerated type mixed with another type
+User\main.c(155): warning:  #188-D: enumerated type mixed with another type
   	GPIO_WriteBit(PORT_LED,DI,0);
-User\main.c(164): warning:  #188-D: enumerated type mixed with another type
+User\main.c(167): warning:  #188-D: enumerated type mixed with another type
   		GPIO_WriteBit(PORT_LED,DI,(data>>i)&1);
-User\main.c(165): warning:  #188-D: enumerated type mixed with another type
+User\main.c(168): warning:  #188-D: enumerated type mixed with another type
   		GPIO_WriteBit(PORT_LED,DCKI,!GPIO_ReadOutputDataBit(PORT_LED,DCKI)); //Create clock
-User\main.c(260): warning:  #1-D: last line of file ends without a newline
+User\main.c(263): warning:  #1-D: last line of file ends without a newline
   	
 User\main.c: 11 warnings, 0 errors
-compiling stm32f10x_adc.c...
-compiling stm32f10x_dbgmcu.c...
-compiling stm32f10x_crc.c...
-compiling stm32f10x_can.c...
-compiling stm32f10x_cec.c...
-compiling stm32f10x_bkp.c...
-compiling stm32f10x_dac.c...
-compiling stm32f10x_exti.c...
-compiling stm32f10x_dma.c...
-compiling stm32f10x_fsmc.c...
-compiling stm32f10x_i2c.c...
-compiling stm32f10x_iwdg.c...
-compiling stm32f10x_gpio.c...
-compiling stm32f10x_flash.c...
-compiling stm32f10x_pwr.c...
-compiling stm32f10x_rtc.c...
-compiling stm32f10x_spi.c...
-compiling stm32f10x_usart.c...
-compiling stm32f10x_sdio.c...
-compiling stm32f10x_rcc.c...
-compiling stm32f10x_tim.c...
-compiling stm32f10x_wwdg.c...
-compiling system_stm32f10x.c...
 linking...
-Program Size: Code=3664 RO-data=268 RW-data=20 ZI-data=1636  
+Program Size: Code=3696 RO-data=268 RW-data=20 ZI-data=1636  
 FromELF: creating hex file...
-".\Objects\ARM_F1_Periph.axf" - 0 Error(s), 28 Warning(s).
+".\Objects\ARM_F1_Periph.axf" - 0 Error(s), 11 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -135,7 +68,7 @@ Package Vendor: Keil
   F:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:06
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

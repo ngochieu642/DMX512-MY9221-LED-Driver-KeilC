@@ -923,10 +923,10 @@ Image Symbol Table
     i.beginWrite                             0x08000dc2   Section        0  main.o(i.beginWrite)
     i.endWrite                               0x08000dcc   Section        0  main.o(i.endWrite)
     i.main                                   0x08000dd4   Section        0  main.o(i.main)
-    i.msDelay                                0x08000e54   Section        0  main.o(i.msDelay)
-    i.trigger_latch                          0x08000e88   Section        0  main.o(i.trigger_latch)
-    i.usDelay                                0x08000ec8   Section        0  main.o(i.usDelay)
-    i.write16                                0x08000efc   Section        0  main.o(i.write16)
+    i.msDelay                                0x08000e74   Section        0  main.o(i.msDelay)
+    i.trigger_latch                          0x08000ea8   Section        0  main.o(i.trigger_latch)
+    i.usDelay                                0x08000ee8   Section        0  main.o(i.usDelay)
+    i.write16                                0x08000f1c   Section        0  main.o(i.write16)
     .data                                    0x20000000   Section       20  system_stm32f10x.o(.data)
     .bss                                     0x20000014   Section       96  libspace.o(.bss)
     HEAP                                     0x20000078   Section      512  startup_stm32f10x_md.o(HEAP)
@@ -1112,13 +1112,13 @@ Image Symbol Table
     UsageFault_Handler                       0x08000dbf   Thumb Code     4  stm32f10x_it.o(i.UsageFault_Handler)
     beginWrite                               0x08000dc3   Thumb Code    10  main.o(i.beginWrite)
     endWrite                                 0x08000dcd   Thumb Code     8  main.o(i.endWrite)
-    main                                     0x08000dd5   Thumb Code   108  main.o(i.main)
-    msDelay                                  0x08000e55   Thumb Code    52  main.o(i.msDelay)
-    trigger_latch                            0x08000e89   Thumb Code    58  main.o(i.trigger_latch)
-    usDelay                                  0x08000ec9   Thumb Code    46  main.o(i.usDelay)
-    write16                                  0x08000efd   Thumb Code    60  main.o(i.write16)
-    Region$$Table$$Base                      0x08000f3c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08000f5c   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x08000dd5   Thumb Code   140  main.o(i.main)
+    msDelay                                  0x08000e75   Thumb Code    52  main.o(i.msDelay)
+    trigger_latch                            0x08000ea9   Thumb Code    58  main.o(i.trigger_latch)
+    usDelay                                  0x08000ee9   Thumb Code    46  main.o(i.usDelay)
+    write16                                  0x08000f1d   Thumb Code    60  main.o(i.write16)
+    Region$$Table$$Base                      0x08000f5c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08000f7c   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_stm32f10x.o(.data)
     AHBPrescTable                            0x20000004   Data          16  system_stm32f10x.o(.data)
     __libspace_start                         0x20000014   Data          96  libspace.o(.bss)
@@ -1132,9 +1132,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00000f70, Max: 0x00010000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00000f90, Max: 0x00010000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000f5c, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000f7c, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1238,21 +1238,21 @@ Memory Map of the image
     0x08000dbe   0x08000dbe   0x00000004   Code   RO          250    i.UsageFault_Handler  stm32f10x_it.o
     0x08000dc2   0x08000dc2   0x0000000a   Code   RO           21    i.beginWrite        main.o
     0x08000dcc   0x08000dcc   0x00000008   Code   RO           22    i.endWrite          main.o
-    0x08000dd4   0x08000dd4   0x00000080   Code   RO           23    i.main              main.o
-    0x08000e54   0x08000e54   0x00000034   Code   RO           24    i.msDelay           main.o
-    0x08000e88   0x08000e88   0x00000040   Code   RO           25    i.trigger_latch     main.o
-    0x08000ec8   0x08000ec8   0x00000034   Code   RO           26    i.usDelay           main.o
-    0x08000efc   0x08000efc   0x00000040   Code   RO           27    i.write16           main.o
-    0x08000f3c   0x08000f3c   0x00000020   Data   RO         3586    Region$$Table       anon$$obj.o
+    0x08000dd4   0x08000dd4   0x000000a0   Code   RO           23    i.main              main.o
+    0x08000e74   0x08000e74   0x00000034   Code   RO           24    i.msDelay           main.o
+    0x08000ea8   0x08000ea8   0x00000040   Code   RO           25    i.trigger_latch     main.o
+    0x08000ee8   0x08000ee8   0x00000034   Code   RO           26    i.usDelay           main.o
+    0x08000f1c   0x08000f1c   0x00000040   Code   RO           27    i.write16           main.o
+    0x08000f5c   0x08000f5c   0x00000020   Data   RO         3586    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08000f5c, Size: 0x00000678, Max: 0x00005000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08000f7c, Size: 0x00000678, Max: 0x00005000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08000f5c   0x00000014   Data   RW         3360    .data               system_stm32f10x.o
+    0x20000000   0x08000f7c   0x00000014   Data   RW         3360    .data               system_stm32f10x.o
     0x20000014        -       0x00000060   Zero   RW         3515    .bss                c_w.l(libspace.o)
-    0x20000074   0x08000f70   0x00000004   PAD
+    0x20000074   0x08000f90   0x00000004   PAD
     0x20000078        -       0x00000200   Zero   RW            2    HEAP                startup_stm32f10x_md.o
     0x20000278        -       0x00000400   Zero   RW            1    STACK               startup_stm32f10x_md.o
 
@@ -1264,7 +1264,7 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-      1064        110          0          0          0     260345   main.o
+      1096        110          0          0          0     260357   main.o
        750          0          0          0          0       2251   sparkle.o
         64         26        236          0       1536        904   startup_stm32f10x_md.o
        314          0          0          0          0       4389   stm32f10x_gpio.o
@@ -1274,7 +1274,7 @@ Image component sizes
        328         28          0         20          0       2505   system_stm32f10x.o
 
     ----------------------------------------------------------------------
-      3384        294        268         20       1536     280687   Object Totals
+      3416        294        268         20       1536     280699   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          6          0          0          0          0          0   (incl. Padding)
 
@@ -1323,15 +1323,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      3664        310        268         20       1636     279031   Grand Totals
-      3664        310        268         20       1636     279031   ELF Image Totals
-      3664        310        268         20          0          0   ROM Totals
+      3696        310        268         20       1636     279043   Grand Totals
+      3696        310        268         20       1636     279043   ELF Image Totals
+      3696        310        268         20          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 3932 (   3.84kB)
+    Total RO  Size (Code + RO Data)                 3964 (   3.87kB)
     Total RW  Size (RW Data + ZI Data)              1656 (   1.62kB)
-    Total ROM Size (Code + RO Data + RW Data)       3952 (   3.86kB)
+    Total ROM Size (Code + RO Data + RW Data)       3984 (   3.89kB)
 
 ==============================================================================
 

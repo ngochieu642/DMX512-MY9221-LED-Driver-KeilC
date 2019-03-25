@@ -46,7 +46,7 @@ int main(void){
 		//int channelNumber = ChoseFlashPosition(12,1);
 		//ColorRun(0x010101,0x00000f,1);
 		
-		uint8_t buffer[12]={3,2,1,6,5,4,9,8,7,12,11,10};
+		uint8_t buffer[12]={3,2,1,6,5,4,9,8,7,12,11,10}; /*From right to Left*/
 //		uint64_t RGB_BackGround=0x010101,RGB_RunningColor=0x00000f;
 		uint16_t frequency = 7;
 //		float timeDelay = 1000/frequency;
@@ -59,7 +59,10 @@ int main(void){
 	
 //		for(int i=0;i<12;i++){
 		Sparkle12Channel(0x010101,12,0x010000);
-//		msDelay(2000);
+		msDelay(200);
+		Sparkle12Channel(0x010101,1,0x010000);
+		msDelay(200);
+		
 //		}
 
 	}
