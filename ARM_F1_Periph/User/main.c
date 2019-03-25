@@ -80,7 +80,7 @@ void GPIO_Configuration(void){
 	
 	/*PA3 as Rx*/
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 	GPIO_Init(GPIOA,&GPIO_InitStructure);
 }
 void SysTick_Configuration(void){
