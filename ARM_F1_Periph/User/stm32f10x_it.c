@@ -160,13 +160,9 @@ void USART1_IRQHandler(void){
 				breakCondition=false;
 				startFrame=false;
 				dmx_counter=0;
+				GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
 			}
-		}
-		
-		
-		//do other jobs
-		
-		
+		}			
 	}
 }
 
