@@ -185,3 +185,39 @@ void msDelay(uint32_t nTime){ /*function to delay nTime ms with TIM2 set as ms*/
 	}
 	TIM_Cmd(TIM2,DISABLE);
 }
+/*LED function*/
+void trigger_latch(void){/*do the trigger work*/
+	GPIO_WriteBit(PORT_LED,DI,0);
+	msDelay(1);
+	for(int i=0;i<4;i++){
+		GPIO_SetBits(PORT_LED,DI);
+		usDelay(250);
+		GPIO_ResetBits(PORT_LED,DI);
+		usDelay(250);
+		
+	}
+}
+void write16(uint16_t data){/*send 16 bit*/
+	for (int i=15;i>=0;i--){
+		GPIO_WriteBit(PORT_LED,DI,(data>>i)&1);
+		GPIO_WriteBit(PORT_LED,DCKI,!GPIO_ReadOutputDataBit(PORT_LED,DCKI)); //Create clock
+	}
+}
+void beginWrite(void){/*write 16 command bit*/
+	write16(0); /*Command 8 bit mode - bit 207 to 192*/
+}
+void endWrite(void){
+	trigger_latch();
+}
+void SendSPI(void){
+		uint8_t buff1[12] ={	dmx_receive[0],dmx_receive[1],dmx_receive[2], 	//b	3
+													dmx_receive[3],dmx_receive[4],dmx_receive[5],		//g 2
+													dmx_receive[6],dmx_receive[7],dmx_receive[8], 	//r 1
+													0x00,0x00,0x00};
+		beginWrite();
+		for(int i=0;i<12;i++){
+		write16(buff1[i]);
+		}
+		endWrite();
+}
+	
