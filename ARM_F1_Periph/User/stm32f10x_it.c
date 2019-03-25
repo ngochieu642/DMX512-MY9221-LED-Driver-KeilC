@@ -34,6 +34,7 @@
 /* Private variables ---------------------------------------------------------*/
 uint8_t dmx_receive[512];
 uint16_t dmx_counter=0;
+bool breakCondition=false, startFrame=false;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -139,15 +140,32 @@ void SysTick_Handler(void)
 }
 void USART1_IRQHandler(void){
 	
-	if(USART_GetITStatus(USART1,USART_IT_RXNE)==SET){
+	if(USART_GetITStatus(USART1,USART_IT_RXNE)==SET){/*Receive not Empty is True*/
 		
 		FlagStatus FlagFrameError = USART_GetFlagStatus(USART1, USART_FLAG_FE);
 		uint8_t Data = USART_ReceiveData(USART1);
 		
 		if(FlagFrameError == SET && Data == 0){
 			//Break condition recognized
-			GPIO_WriteBit(GPIOB,GPIO_Pin_13,Bit_RESET);
+			breakCondition = true;
 		}
+		if(breakCondition && USART_GetITStatus(USART1,USART_FLAG_FE)==RESET){/*If in break condition and detect first frame recevied correctly*/
+			startFrame=true;
+		}
+		if(startFrame){/*Receive 512 Bytes*/
+			if(dmx_counter<512){/*data to dmx_receive*/
+				dmx_receive[dmx_counter++]=USART_ReceiveData(USART1);
+			}
+			else{/*reset breakCondition, startFrame*/
+				breakCondition=false;
+				startFrame=false;
+				dmx_counter=0;
+			}
+		}
+		
+		
+		//do other jobs
+		
 		
 	}
 }

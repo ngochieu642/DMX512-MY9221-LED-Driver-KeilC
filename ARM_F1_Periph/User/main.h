@@ -9,7 +9,7 @@
 #include "stm32f10x_usart.h"
 
 
-#define PORT_LED 	GPIOB
+#define PORT_LED 	GPIOA
 #define DI		GPIO_Pin_7
 #define DCKI	GPIO_Pin_5
 /*Systick*/

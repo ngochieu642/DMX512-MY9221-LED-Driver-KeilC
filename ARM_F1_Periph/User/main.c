@@ -23,10 +23,12 @@ int main(void){
 	SysTick_Configuration();
 	GPIO_Configuration();
 	UART_Configuration();
-	NVIC_Configuration(); /*NVIC MUST BE ABOVE TIM*/
+	NVIC_Configuration();
 	TIM_Configuration();
 	
 	while(1){
+		msDelay(1000);
+//		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
 	}
 }
 
@@ -37,7 +39,7 @@ uint32_t System_GetTick(void){
 
 /*Config*/
 void RCC_Configuration(void){
-	/*Use PB13, PA5, PA7 for output*/
+	/*Use PB13, PA9 PA10 UART1*/
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
 	
@@ -49,15 +51,15 @@ void RCC_Configuration(void){
 }
 void GPIO_Configuration(void){
 	GPIO_InitTypeDef GPIO_InitStructure;
-	/*PB3*/
+	/*PB13*/
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 	
 	/*PA5 and PA7*/
-	GPIO_InitStructure.GPIO_Pin = DI | DCKI;
-	GPIO_Init(PORT_LED,&GPIO_InitStructure);
+//	GPIO_InitStructure.GPIO_Pin = DI | DCKI;
+//	GPIO_Init(PORT_LED,&GPIO_InitStructure);
 	
 	/*PA9-Rx PA10-Tx*/
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
