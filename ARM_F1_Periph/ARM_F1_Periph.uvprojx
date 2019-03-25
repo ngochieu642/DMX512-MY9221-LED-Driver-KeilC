@@ -416,36 +416,6 @@
               <FileType>5</FileType>
               <FilePath>.\User\main.h</FilePath>
             </File>
-            <File>
-              <FileName>sparkle.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\sparkle.c</FilePath>
-            </File>
-            <File>
-              <FileName>sparkle.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\User\sparkle.h</FilePath>
-            </File>
-            <File>
-              <FileName>color.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\color.c</FilePath>
-            </File>
-            <File>
-              <FileName>color.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\User\color.h</FilePath>
-            </File>
-            <File>
-              <FileName>colorRun.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\colorRun.c</FilePath>
-            </File>
-            <File>
-              <FileName>colorRun.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\User\colorRun.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

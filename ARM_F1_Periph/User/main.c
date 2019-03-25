@@ -11,20 +11,10 @@ PUTCHAR_PROTOTYPE
 	
 	return ch;
 }
-
+SysTick_typedef systick={.Systick_Counter=0};
 
 extern void SysTick_DelayUs(uint32_t nTime);
 extern void SysTick_DelayMs(uint32_t nTime);
-extern bool breakCondition;
-
-SysTick_typedef systick={.Systick_Counter=0};
-
-/*Test variable*/
-uint8_t buffer[12] ={	0x01,0x00,0x01,		//Channel 3
-											0x00,0x01,0x00,		//Channel 2
-											0x00,0x00,0x01, 	//Channel 1
-											0x00,0x00,0x00}; /*from left to right is RGB, the order we are using is BGR*/
-
 extern uint8_t dmx_receive[512];
 														
 int main(void){
@@ -36,14 +26,7 @@ int main(void){
 	NVIC_Configuration(); /*NVIC MUST BE ABOVE TIM*/
 	TIM_Configuration();
 	
-	ClearLED();
-	TestLED_ALL(1);
-	
 	while(1){
-		/*Delay*/
-		msDelay(100);
-		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));	
-		SendSPI();
 	}
 }
 
@@ -170,126 +153,3 @@ void msDelay(uint32_t nTime){ /*function to delay nTime ms with TIM2 set as ms*/
 	}
 	TIM_Cmd(TIM2,DISABLE);
 }
-/*LED function*/
-void trigger_latch(void){/*do the trigger work*/
-	GPIO_WriteBit(PORT_LED,DI,0);
-	msDelay(1);
-	for(int i=0;i<4;i++){
-		GPIO_SetBits(PORT_LED,DI);
-		usDelay(250);
-		GPIO_ResetBits(PORT_LED,DI);
-		usDelay(250);
-		
-	}
-}
-void write16(uint16_t data){/*send 16 bit*/
-	for (int i=15;i>=0;i--){
-		GPIO_WriteBit(PORT_LED,DI,(data>>i)&1);
-		GPIO_WriteBit(PORT_LED,DCKI,!GPIO_ReadOutputDataBit(PORT_LED,DCKI)); //Create clock
-	}
-}
-void beginWrite(void){/*write 16 command bit*/
-	write16(0); /*Command 8 bit mode - bit 207 to 192*/
-}
-void endWrite(void){
-	trigger_latch();
-}
-void ClearLED(void){
-		uint8_t myBuff[12] ={0x000,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, 0x00,0x00,0x00}; 
-		beginWrite();
-		for(int i=0;i<12;i++){
-			write16(myBuff[i]);
-		}
-		endWrite();
-}
-void TestLED(int myCase){
-	
-	uint8_t buff0[12] ={	0x00,0x00,0x00,		
-												0x00,0x00,0x00,		
-												0x00,0x00,0x00, 	
-												0x00,0x00,0x00};
-	/*Block 1	R G B*/
-	uint8_t buff1[12] ={	0x01,0x00,0x00, 	//b	3
-												0x00,0x01,0x00,		//g 2
-												0x00,0x00,0x01, 	//r 1
-												0x00,0x00,0x00};
-	/*Block 2 RG GB RB*/
-	uint8_t buff2[12] ={	0x01,0x00,0x01,		
-												0x01,0x01,0x00,		
-												0x00,0x01,0x01, 	
-												0x00,0x00,0x00};
-	/*Block 3 RB GB RG*/
-	uint8_t buff3[12] ={	0x00,0x01,0x01,		
-												0x01,0x01,0x00,		
-												0x01,0x00,0x01, 	
-												0x00,0x00,0x00};
-	/*Block 4 B G R*/
-	uint8_t buff4[12] ={	0x00,0x00,0x01,		
-												0x00,0x01,0x00,		
-												0x01,0x00,0x00, 	
-												0x00,0x00,0x00};
-	switch(myCase){
-		case 1:
-			beginWrite();
-			for(int i=0;i<12;i++){
-			write16(buff1[i]);
-			}
-			endWrite();
-			break;
-		case 2:
-			beginWrite();
-			for(int i=0;i<12;i++){
-			write16(buff2[i]);
-			}
-			endWrite();
-			break;
-		case 3:
-			beginWrite();
-			for(int i=0;i<12;i++){
-			write16(buff3[i]);
-			}
-			endWrite();
-			break;
-		case 4:
-			beginWrite();
-			for(int i=0;i<12;i++){
-			write16(buff4[i]);
-			}
-			endWrite();
-			break;
-		default:{
-			beginWrite();
-			for(int i=0;i<12;i++){
-			write16(buff0[i]);
-			}
-			endWrite();
-			break;}			
-	}
-}
-void TestLED_ALL(int myCode){
-	switch(myCode){
-		case 0:
-			for(int i=0;i<4;i++)
-			TestLED(0);
-			break;
-		default:
-			TestLED(1);
-			TestLED(2);
-			TestLED(3);
-			TestLED(4);
-			break;
-	}
-}
-/*Send SPI*/
-void SendSPI(void){
-		uint8_t buff1[12] ={	dmx_receive[0],dmx_receive[1],dmx_receive[2], 	//b	3
-													dmx_receive[3],dmx_receive[4],dmx_receive[5],		//g 2
-													dmx_receive[6],dmx_receive[7],dmx_receive[8], 	//r 1
-													0x00,0x00,0x00};
-		beginWrite();
-		for(int i=0;i<12;i++){
-		write16(buff1[i]);
-		}
-		endWrite();
-}
-	

@@ -32,7 +32,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-bool breakCondition=false,startCode=false;
 uint8_t dmx_receive[512];
 uint16_t dmx_counter=0;
 /* Private function prototypes -----------------------------------------------*/
@@ -139,39 +138,18 @@ void SysTick_Handler(void)
 {
 }
 void USART1_IRQHandler(void){
+	
+	if(USART_GetITStatus(USART1,USART_IT_RXNE)==SET){
 		
-		/*Break condition detected*/
-		if(USART_GetITStatus(USART1,USART_IT_FE)!=RESET)
-		{
-		/*set flag to True*/
-		breakCondition=true;
+		FlagStatus FlagFrameError = USART_GetFlagStatus(USART1, USART_FLAG_FE);
+		uint8_t Data = USART_ReceiveData(USART1);
+		
+		if(FlagFrameError == SET && Data == 0){
+			//Break condition recognized
+			GPIO_WriteBit(GPIOB,GPIO_Pin_13,Bit_RESET);
 		}
-
-		/*
-		If already in break condition, and get the first byte of data arrive
-		The first byte received correctly is interpreted as the Start code
-		*/
-		if(breakCondition && !USART_GetITStatus(USART1,USART_IT_FE)){
-		startCode=true;
-		}
-
-		/*
-		a loop to capture up to 512 bytes
-		stores them sequentially in the receiver buffer
-		*/
-		if(breakCondition && startCode){
-			uint8_t data;
-
-			if(dmx_counter<512){
-			data = USART_ReceiveData(USART1);
-			dmx_receive[dmx_counter++]=data;
-			}else{
-			dmx_counter=0;
-			breakCondition=false;
-			startCode=false;
-			}
-		}
-
+		
+	}
 }
 
 /******************************************************************************/

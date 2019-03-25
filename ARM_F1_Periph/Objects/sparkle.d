@@ -36,10 +36,3 @@
 .\objects\sparkle.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\sparkle.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\sparkle.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\sparkle.o: .\User\sparkle.h
-.\objects\sparkle.o: .\User\color.h
-.\objects\sparkle.o: .\User\color.h
-.\objects\sparkle.o: .\User\colorRun.h
-.\objects\sparkle.o: .\User\color.h
-.\objects\sparkle.o: .\User\sparkle.h
-.\objects\sparkle.o: .\User\color.h

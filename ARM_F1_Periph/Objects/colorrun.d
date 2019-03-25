@@ -38,10 +38,3 @@
 .\objects\colorrun.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\colorrun.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\colorrun.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\colorrun.o: .\User\sparkle.h
-.\objects\colorrun.o: .\User\color.h
-.\objects\colorrun.o: .\User\color.h
-.\objects\colorrun.o: .\User\colorRun.h
-.\objects\colorrun.o: .\User\color.h
-.\objects\colorrun.o: .\User\sparkle.h
-.\objects\colorrun.o: .\User\color.h
