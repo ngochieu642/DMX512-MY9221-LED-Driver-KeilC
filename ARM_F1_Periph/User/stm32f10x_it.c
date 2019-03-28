@@ -138,8 +138,6 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
 }
-void USART1_IRQHandler(void){
-}
 void USART2_IRQHandler(void){
 	
 	FlagStatus FlagFrameError = USART_GetFlagStatus(USART2, USART_FLAG_FE);
@@ -160,13 +158,14 @@ void USART2_IRQHandler(void){
 		
 		if(startFrame){/*Receive 512 Bytes*/
 			if(dmx_counter<512){/*data to dmx_receive*/
+				
 				dmx_receive[dmx_counter++]=USART_ReceiveData(USART2);
+				
 			}
 			else{/*reset breakCondition, startFrame*/
 				breakCondition=false;
 				startFrame=false;
 				dmx_counter=0;
-//				GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
 				GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
 			}
 		}			

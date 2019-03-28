@@ -16,6 +16,7 @@ SysTick_typedef systick={.Systick_Counter=0};
 extern void SysTick_DelayUs(uint32_t nTime);
 extern void SysTick_DelayMs(uint32_t nTime);
 extern uint8_t dmx_receive[512];
+extern uint16_t dmx_counter;
 														
 int main(void){
 	/*Config function*/
@@ -31,8 +32,8 @@ int main(void){
 	ClearLED();
 	
 	while(1){
-//		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
-		//GPIO_WriteBit(GPIOB,GPIO_Pin_13,1);
+//			GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
+//			msDelay(1000);
 	}
 }
 
@@ -118,12 +119,6 @@ void NVIC_Configuration(void){
 	NVIC_EnableIRQ(TIM2_IRQn);
 	NVIC_EnableIRQ(TIM3_IRQn);
 	
-	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority=0;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=1;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-	
 	NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority=1;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=1;
@@ -135,9 +130,9 @@ void UART_Configuration(void){
 	USART_InitTypeDef USART_InitStructure;
 	
 	/*UART1*/
-	USART_InitStructure.USART_BaudRate = 250000;
+	USART_InitStructure.USART_BaudRate = 115200;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-	USART_InitStructure.USART_StopBits = USART_StopBits_2;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
 	USART_InitStructure.USART_Parity = USART_Parity_No;
 	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
@@ -153,15 +148,13 @@ void UART_Configuration(void){
 	USART_Init(USART2,&USART_InitStructure);
 	
 	/*Clear Receive Flag*/
-	USART_ClearFlag(USART1,USART_IT_RXNE);
 	USART_ClearFlag(USART2,USART_IT_RXNE);
 	
 	/*Enable interrupt when receive*/
-	USART_ITConfig(USART1,USART_IT_RXNE,ENABLE);
 	USART_ITConfig(USART2,USART_IT_RXNE,ENABLE);
 	
 	/*Enable UART*/
-	USART_Cmd(USART1,ENABLE);
+	USART_Cmd(USART1,ENABLE); /*printf*/
 	USART_Cmd(USART2,ENABLE);
 }
 /*Delay*/
