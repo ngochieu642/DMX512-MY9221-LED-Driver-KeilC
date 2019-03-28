@@ -17,6 +17,7 @@ extern void SysTick_DelayUs(uint32_t nTime);
 extern void SysTick_DelayMs(uint32_t nTime);
 extern uint8_t dmx_receive[512];
 extern uint16_t dmx_counter;
+bool SPI_send=false;
 														
 int main(void){
 	/*Config function*/
@@ -144,14 +145,14 @@ void UART_Configuration(void){
 	USART_InitStructure.USART_StopBits = USART_StopBits_2;
 	USART_InitStructure.USART_Parity = USART_Parity_No;
 	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx;
 	USART_Init(USART2,&USART_InitStructure);
 	
 	/*Clear Receive Flag*/
 	USART_ClearFlag(USART2,USART_IT_RXNE);
 	
-	/*Enable interrupt when receive*/
-	USART_ITConfig(USART2,USART_IT_RXNE,ENABLE);
+	/*Enable interrupt when receive or Error*/
+	USART_ITConfig(USART2,USART_IT_RXNE | USART_FLAG_FE,ENABLE);
 	
 	/*Enable UART*/
 	USART_Cmd(USART1,ENABLE); /*printf*/
