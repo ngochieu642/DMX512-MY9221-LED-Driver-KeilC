@@ -30,11 +30,19 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+#define FLAG_INACTIVE 0
+#define FLAG_ACTIVE		1
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint8_t dmx_receive[512];
 uint16_t dmx_counter=0;
 bool breakCondition=false, startFrame=false;
+
+/*Anh Toan code*/
+uint8_t data[600];
+uint16_t count;
+uint8_t flag = FLAG_INACTIVE;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -139,36 +147,16 @@ void SysTick_Handler(void)
 {
 }
 void USART2_IRQHandler(void){
-	
-	FlagStatus FlagFrameError = USART_GetFlagStatus(USART2, USART_FLAG_FE);
-	uint8_t Data = USART_ReceiveData(USART2);
-	
-	
-	if(FlagFrameError == SET && Data == 0){
-		//Break condition recognized
-		breakCondition = true;
-		
+	if(USART_GetFlagStatus(USART2,USART_FLAG_FE)){/*If there were frame error*/
+		flag = FLAG_ACTIVE;
+		count = 0;
+		USART_ClearFlag(USART2,USART_FLAG_FE);
 	}
-		
-//	if(USART_GetITStatus(USART2,USART_IT_RXNE)==SET){/*Receive not Empty is True*/
-		if(breakCondition && USART_GetITStatus(USART2,USART_FLAG_FE)!=SET){/*If in break condition and detect first frame recevied correctly*/
-			startFrame=true;
-			
-		}
-		
-		if(startFrame){/*Receive 512 Bytes*/
-			if(dmx_counter<512){/*data to dmx_receive*/
-				dmx_receive[dmx_counter++]=USART_ReceiveData(USART2);
-				USART_SendData(USART1,dmx_counter);
-			}
-			else{/*reset breakCondition, startFrame*/
-				breakCondition=false;
-				startFrame=false;
-				dmx_counter=0;
-				GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
-			}
-		}			
-//	}
+	while(USART_GetFlagStatus(USART2,USART_FLAG_RXNE)==RESET){}
+	
+	/*Receive not Empty data*/
+	data[count++]=USART_ReceiveData(USART2);
+	USART_SendData(USART1,data[count-1]);
 }
 
 
