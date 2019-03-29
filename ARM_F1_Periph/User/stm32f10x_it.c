@@ -159,8 +159,7 @@ void USART2_IRQHandler(void){
 		if(startFrame){/*Receive 512 Bytes*/
 			if(dmx_counter<512){/*data to dmx_receive*/
 				dmx_receive[dmx_counter++]=USART_ReceiveData(USART2);
-				USART_SendData(USART1,dmx_receive[dmx_counter-1]);
-				
+				USART_SendData(USART1,dmx_counter);
 			}
 			else{/*reset breakCondition, startFrame*/
 				breakCondition=false;

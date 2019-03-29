@@ -34,7 +34,7 @@ int main(void){
 	
 	while(1){
 //			GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
-//			msDelay(1000);
+			
 	}
 }
 
@@ -131,7 +131,7 @@ void UART_Configuration(void){
 	USART_InitTypeDef USART_InitStructure;
 	
 	/*UART1*/
-	USART_InitStructure.USART_BaudRate = 115200;
+	USART_InitStructure.USART_BaudRate = 19200;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
 	USART_InitStructure.USART_StopBits = USART_StopBits_1;
 	USART_InitStructure.USART_Parity = USART_Parity_No;
