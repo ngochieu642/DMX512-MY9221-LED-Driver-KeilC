@@ -152,7 +152,7 @@ void UART_Configuration(void){
 	USART_ClearFlag(USART2,USART_IT_RXNE);
 	
 	/*Enable interrupt when receive or Error*/
-	USART_ITConfig(USART2,USART_IT_RXNE | USART_FLAG_FE,ENABLE);
+	USART_ITConfig(USART2,USART_IT_RXNE,ENABLE);
 	
 	/*Enable UART*/
 	USART_Cmd(USART1,ENABLE); /*printf*/

@@ -153,7 +153,7 @@ void USART2_IRQHandler(void){
 		USART_ClearFlag(USART2,USART_FLAG_FE);
 	}
 	
-	if(count==250)
+	if(count==512)
 		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
 	
 	/*If receive Empty*/
