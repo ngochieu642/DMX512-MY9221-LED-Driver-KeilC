@@ -38,13 +38,11 @@ int main(void){
 	GPIO_WriteBit(GPIOB,GPIO_Pin_9,0);
 	
 	while(1){
-//			GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
-//			if(uart_count > 0)
-//			{
-//				uart_count--;
-//				USART_SendData(USART1, uart_data[uart_count]);
-//				
-//			}
+//		for(int i=0;i<10;i++){
+//			USART_SendData(USART1,(char)uart_data[i]);
+//		}
+		USART_SendData(USART1,(char)uart_data[38]);
+		msDelay(10);
 	}
 }
 

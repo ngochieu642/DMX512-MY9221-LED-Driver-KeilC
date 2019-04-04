@@ -44,7 +44,6 @@ extern uint8_t uart_data[1000];
 /*Anh Toan code*/
 uint8_t data[600];
 uint16_t count;
-uint8_t flag = FLAG_INACTIVE;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -151,7 +150,6 @@ void SysTick_Handler(void)
 }
 void USART2_IRQHandler(void){
 	if(USART_GetFlagStatus(USART2,USART_FLAG_FE)){/*If there were frame error*/
-		flag = FLAG_ACTIVE;
 		count = 0;
 		uart_count=0;
 		USART_ClearFlag(USART2,USART_FLAG_FE);
@@ -164,7 +162,7 @@ void USART2_IRQHandler(void){
 	/*Receive 'not Empty' data*/
 	{
 		uart_data[uart_count++]=USART_ReceiveData(USART2);
-		USART_SendData(USART1,(char)(242));
+//		USART_SendData(USART1,(char)(242));
 //		USART_SendData(USART1,(char)(uart_data[uart_count-1]));
 	}
 }

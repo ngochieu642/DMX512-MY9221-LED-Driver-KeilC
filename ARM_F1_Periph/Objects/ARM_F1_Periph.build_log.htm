@@ -27,16 +27,24 @@ Project File Date:  03/28/2019
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'F:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'ARM_F1_Periph'
-compiling stm32f10x_it.c...
+compiling main.c...
 User\main.h(43): warning:  #1-D: last line of file ends without a newline
   void ClearLED(void);
-User\stm32f10x_it.c(160): warning:  #188-D: enumerated type mixed with another type
-  		GPIO_WriteBit(GPIOB,GPIO_Pin_9,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_9));
-User\stm32f10x_it.c: 2 warnings, 0 errors
+User\main.c(38): warning:  #188-D: enumerated type mixed with another type
+  	GPIO_WriteBit(GPIOB,GPIO_Pin_9,0);
+User\main.c(193): warning:  #188-D: enumerated type mixed with another type
+  	GPIO_WriteBit(PORT_LED,DI,0);
+User\main.c(205): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(PORT_LED,DI,(data>>i)&1);
+User\main.c(206): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(PORT_LED,DCKI,!GPIO_ReadOutputDataBit(PORT_LED,DCKI)); //Create clock
+User\main.c(233): warning:  #1-D: last line of file ends without a newline
+  }
+User\main.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=3616 RO-data=268 RW-data=56 ZI-data=2632  
+Program Size: Code=3620 RO-data=268 RW-data=56 ZI-data=2632  
 FromELF: creating hex file...
-".\Objects\ARM_F1_Periph.axf" - 0 Error(s), 2 Warning(s).
+".\Objects\ARM_F1_Periph.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 
