@@ -233,6 +233,3 @@ void SendSPI(void){
 		}
 		endWrite();
 }
-uint16_t toASCII(uint16_t data){
-	return (data+48)&0xff;
-}
