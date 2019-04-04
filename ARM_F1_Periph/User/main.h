@@ -41,3 +41,6 @@ void beginWrite(void);
 void endWrite(void);
 void SendSPI(void);
 void ClearLED(void);
+/*UART LED*/
+void uartLED(uint8_t buffer[],int myCase);
+void uartAllLED(int myCode,uint8_t buffer[]);

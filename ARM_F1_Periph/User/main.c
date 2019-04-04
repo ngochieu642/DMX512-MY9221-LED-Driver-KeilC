@@ -41,8 +41,10 @@ int main(void){
 //		for(int i=0;i<10;i++){
 //			USART_SendData(USART1,(char)uart_data[i]);
 //		}
-		USART_SendData(USART1,(char)uart_data[38]);
+		USART_SendData(USART1,(char)uart_data[35]);
 		msDelay(10);
+		ClearLED();
+		uartAllLED(1,uart_data);
 	}
 }
 
@@ -230,4 +232,82 @@ void SendSPI(void){
 		write16(buff1[i]);
 		}
 		endWrite();
+}
+void uartLED(uint8_t buffer[], int myCase){
+	uint8_t buff0[12] ={	0x00,0x00,0x00,		
+												0x00,0x00,0x00,		
+												0x00,0x00,0x00, 	
+												0x00,0x00,0x00};
+	/*Block 1*/
+	uint8_t buff1[12] ={	buffer[4],buffer[3],buffer[2], 
+												buffer[7],buffer[6],buffer[5],		
+												buffer[10],buffer[9],buffer[8], 	
+												0x00,0x00,0x00};
+	/*Block 2*/
+	uint8_t buff2[12] ={	buffer[13],buffer[12],buffer[11], 
+												buffer[16],buffer[15],buffer[14],		
+												buffer[19],buffer[18],buffer[17], 	
+												0x00,0x00,0x00};
+	/*Block 3*/
+	uint8_t buff3[12] ={	buffer[22],buffer[21],buffer[20], 
+												buffer[25],buffer[24],buffer[23],		
+												buffer[28],buffer[27],buffer[26], 	
+												0x00,0x00,0x00};
+	/*Block 4*/
+	uint8_t buff4[12] ={	buffer[31],buffer[30],buffer[29], 
+												buffer[34],buffer[33],buffer[32],		
+												buffer[37],buffer[36],buffer[35], 	
+												0x00,0x00,0x00};
+	
+		switch(myCase){
+		case 1:
+			beginWrite();
+			for(int i=0;i<12;i++){
+			write16(buff1[i]);
+			}
+			endWrite();
+			break;
+		case 2:
+			beginWrite();
+			for(int i=0;i<12;i++){
+			write16(buff2[i]);
+			}
+			endWrite();
+			break;
+		case 3:
+			beginWrite();
+			for(int i=0;i<12;i++){
+			write16(buff3[i]);
+			}
+			endWrite();
+			break;
+		case 4:
+			beginWrite();
+			for(int i=0;i<12;i++){
+			write16(buff4[i]);
+			}
+			endWrite();
+			break;
+		default:{
+			beginWrite();
+			for(int i=0;i<12;i++){
+			write16(buff0[i]);
+			}
+			endWrite();
+			break;}			
+	}										
+}
+void uartAllLED(int myCode,uint8_t buffer[]){
+	switch(myCode){
+		case 0:
+			for(int i=0;i<4;i++)
+				uartLED(buffer,0);
+				break;
+		default:
+				uartLED(buffer,1);
+				uartLED(buffer,2);
+				uartLED(buffer,3);
+				uartLED(buffer,4);
+				break;
+	}
 }
