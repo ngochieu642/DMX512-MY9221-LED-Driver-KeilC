@@ -165,6 +165,7 @@ void USART2_IRQHandler(void){
 	{
 		uart_data[uart_count++]=USART_ReceiveData(USART2);
 		USART_SendData(USART1,(char)(242));
+//		USART_SendData(USART1,(char)(uart_data[uart_count-1]));
 	}
 }
 
