@@ -35,6 +35,7 @@ int main(void){
 	
 	msDelay(1000);
 	ClearLED();
+	uartAllLED(0,uart_data);
 	GPIO_WriteBit(GPIOB,GPIO_Pin_9,0);
 	
 	while(1){
