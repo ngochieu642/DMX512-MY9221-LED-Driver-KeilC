@@ -8,7 +8,6 @@ PUTCHAR_PROTOTYPE
 {
 	USART_SendData(USART1, (uint8_t) ch); 
 	while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET);
-	
 	return ch;
 }
 SysTick_typedef systick={.Systick_Counter=0};
@@ -35,7 +34,8 @@ int main(void){
 	
 	msDelay(1000);
 	ClearLED();
-	uartAllLED(0,uart_data);
+	TestLED_ALL(0);
+	//uartAllLED(0,uart_data);
 	GPIO_WriteBit(GPIOB,GPIO_Pin_9,0);
 	
 	while(1){
@@ -45,7 +45,8 @@ int main(void){
 		USART_SendData(USART1,(char)uart_data[35]);
 		msDelay(100);
 		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
-		uartAllLED(1,uart_data);
+		//uartAllLED(1,uart_data);
+		TestLED_ALL(0);
 	}
 }
 
@@ -299,5 +300,83 @@ void uartAllLED(int myCode,uint8_t buffer[]){
 				uartLED(buffer,3);
 				uartLED(buffer,4);
 				break;
+	}
+}
+void TestLED(int myCase){
+	
+	uint8_t buff0[12] ={	0x00,0x00,0x00,		
+												0x00,0x00,0x00,		
+												0x00,0x00,0x00, 	
+												0x00,0x00,0x00};
+	/*Block 1	R G B*/
+	uint8_t buff1[12] ={	0x01,0x00,0x00, 	//b	3
+												0x00,0x01,0x00,		//g 2
+												0x00,0x00,0x01, 	//r 1
+												0x00,0x00,0x00};
+	/*Block 2 RG GB RB*/
+	uint8_t buff2[12] ={	0x01,0x00,0x01,		
+												0x01,0x01,0x00,		
+												0x00,0x01,0x01, 	
+												0x00,0x00,0x00};
+	/*Block 3 RB GB RG*/
+	uint8_t buff3[12] ={	0x00,0x01,0x01,		
+												0x01,0x01,0x00,		
+												0x01,0x00,0x01, 	
+												0x00,0x00,0x00};
+	/*Block 4 B G R*/
+	uint8_t buff4[12] ={	0x00,0x00,0x01,		
+												0x00,0x01,0x00,		
+												0x01,0x00,0x00, 	
+												0x00,0x00,0x00};
+	switch(myCase){
+		case 1:
+			beginWrite();
+			for(int i=0;i<12;i++){
+			write16(buff1[i]);
+			}
+			endWrite();
+			break;
+		case 2:
+			beginWrite();
+			for(int i=0;i<12;i++){
+			write16(buff2[i]);
+			}
+			endWrite();
+			break;
+		case 3:
+			beginWrite();
+			for(int i=0;i<12;i++){
+			write16(buff3[i]);
+			}
+			endWrite();
+			break;
+		case 4:
+			beginWrite();
+			for(int i=0;i<12;i++){
+			write16(buff4[i]);
+			}
+			endWrite();
+			break;
+		default:{
+			beginWrite();
+			for(int i=0;i<12;i++){
+			write16(buff0[i]);
+			}
+			endWrite();
+			break;}			
+	}
+}
+void TestLED_ALL(int myCode){
+	switch(myCode){
+		case 0:
+			for(int i=0;i<4;i++)
+			TestLED(0);
+			break;
+		default:
+			TestLED(1);
+			TestLED(2);
+			TestLED(3);
+			TestLED(4);
+			break;
 	}
 }

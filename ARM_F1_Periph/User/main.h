@@ -40,6 +40,8 @@ void write16(uint16_t data);
 void beginWrite(void);
 void endWrite(void);
 void ClearLED(void);
+void TestLED(int myCase);
+void TestLED_ALL(int myCode);
 /*UART LED*/
 void uartLED(uint8_t buffer[],int myCase);
 void uartAllLED(int myCode,uint8_t buffer[]);
