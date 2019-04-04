@@ -42,8 +42,8 @@ int main(void){
 //			USART_SendData(USART1,(char)uart_data[i]);
 //		}
 		USART_SendData(USART1,(char)uart_data[35]);
-		msDelay(10);
-		ClearLED();
+		msDelay(100);
+		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
 		uartAllLED(1,uart_data);
 	}
 }
@@ -71,7 +71,7 @@ void RCC_Configuration(void){
 void GPIO_Configuration(void){
 	GPIO_InitTypeDef GPIO_InitStructure;
 	/*PB9*/
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
@@ -219,17 +219,6 @@ void ClearLED(void){
 		beginWrite();
 		for(int i=0;i<12;i++){
 			write16(myBuff[i]);
-		}
-		endWrite();
-}
-void SendSPI(void){
-		uint8_t buff1[12] ={	dmx_receive[0],dmx_receive[1],dmx_receive[2], 	
-													dmx_receive[3],dmx_receive[4],dmx_receive[5],		
-													dmx_receive[6],dmx_receive[7],dmx_receive[8],
-													0x00,0x00,0x00};
-		beginWrite();
-		for(int i=0;i<12;i++){
-		write16(buff1[i]);
 		}
 		endWrite();
 }

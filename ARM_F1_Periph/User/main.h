@@ -39,7 +39,6 @@ void trigger_latch(void);
 void write16(uint16_t data);
 void beginWrite(void);
 void endWrite(void);
-void SendSPI(void);
 void ClearLED(void);
 /*UART LED*/
 void uartLED(uint8_t buffer[],int myCase);

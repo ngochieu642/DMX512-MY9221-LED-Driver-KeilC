@@ -153,9 +153,7 @@ void USART2_IRQHandler(void){
 		count = 0;
 		uart_count=0;
 		USART_ClearFlag(USART2,USART_FLAG_FE);
-	}
-	if(count==512)                          
-		GPIO_WriteBit(GPIOB,GPIO_Pin_9,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_9));
+	}                     
 
 	/*If receive Empty*/
 	while(USART_GetFlagStatus(USART2,USART_FLAG_RXNE)==RESET){}
