@@ -158,22 +158,13 @@ void USART2_IRQHandler(void){
 	}
 	if(count==512)                          
 		GPIO_WriteBit(GPIOB,GPIO_Pin_9,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_9));
-	
-	/*If receive Empty*/
-//	while(USART_GetFlagStatus(USART2,USART_FLAG_RXNE)==RESET){}
-//	/*Receive 'not Empty' data*/
-//	{
-//		data[count++]=USART_ReceiveData(USART2);
-//		USART_SendData(USART1,'b');
-//	}
-	
 
+	/*If receive Empty*/
 	while(USART_GetFlagStatus(USART2,USART_FLAG_RXNE)==RESET){}
 	/*Receive 'not Empty' data*/
 	{
 		uart_data[uart_count++]=USART_ReceiveData(USART2);
-		
-		USART_SendData(USART1,uart_data[count-1]);
+		USART_SendData(USART1,(char)(242));
 	}
 }
 

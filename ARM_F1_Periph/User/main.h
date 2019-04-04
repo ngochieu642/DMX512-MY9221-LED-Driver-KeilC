@@ -34,6 +34,9 @@ void DMA_Configuration(void);
 void usDelay(uint32_t nTime);
 void msDelay(uint32_t nTime);
 
+/*ASCII*/
+uint16_t toASCII(uint16_t data);
+
 /*LED function*/
 void trigger_latch(void);
 void write16(uint16_t data);

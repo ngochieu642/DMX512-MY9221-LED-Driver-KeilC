@@ -35,6 +35,7 @@ int main(void){
 	
 	msDelay(1000);
 	ClearLED();
+	GPIO_WriteBit(GPIOB,GPIO_Pin_9,0);
 	
 	while(1){
 //			GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
@@ -44,8 +45,6 @@ int main(void){
 //				USART_SendData(USART1, uart_data[uart_count]);
 //				
 //			}
-		
-		msDelay(1000);	
 	}
 }
 
@@ -234,4 +233,6 @@ void SendSPI(void){
 		}
 		endWrite();
 }
-	
+uint16_t toASCII(uint16_t data){
+	return (data+48)&0xff;
+}
