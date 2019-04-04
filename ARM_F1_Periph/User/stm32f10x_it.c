@@ -38,6 +38,9 @@ uint8_t dmx_receive[512];
 uint16_t dmx_counter=0;
 bool breakCondition=false, startFrame=false;
 
+extern uint16_t uart_count;
+extern uint8_t uart_data[1000];
+
 /*Anh Toan code*/
 uint8_t data[600];
 uint16_t count;
@@ -150,17 +153,27 @@ void USART2_IRQHandler(void){
 	if(USART_GetFlagStatus(USART2,USART_FLAG_FE)){/*If there were frame error*/
 		flag = FLAG_ACTIVE;
 		count = 0;
+		uart_count=0;
 		USART_ClearFlag(USART2,USART_FLAG_FE);
 	}
-	
-	if(count==512)
-		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
+	if(count==512)                          
+		GPIO_WriteBit(GPIOB,GPIO_Pin_9,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_9));
 	
 	/*If receive Empty*/
+//	while(USART_GetFlagStatus(USART2,USART_FLAG_RXNE)==RESET){}
+//	/*Receive 'not Empty' data*/
+//	{
+//		data[count++]=USART_ReceiveData(USART2);
+//		USART_SendData(USART1,'b');
+//	}
+	
+
 	while(USART_GetFlagStatus(USART2,USART_FLAG_RXNE)==RESET){}
 	/*Receive 'not Empty' data*/
 	{
-		data[count++]=USART_ReceiveData(USART2);
+		uart_data[uart_count++]=USART_ReceiveData(USART2);
+		
+		USART_SendData(USART1,uart_data[count-1]);
 	}
 }
 

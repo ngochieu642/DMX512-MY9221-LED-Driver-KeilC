@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_tim.h"
-#include <stdbool.h>
 #include "stm32f10x_usart.h"
-
+#include "stm32f10x_dma.h"
 
 #define PORT_LED 	GPIOA
 #define DI		GPIO_Pin_7
@@ -28,6 +28,7 @@ void GPIO_Configuration(void);
 void TIM_Configuration(void);
 void NVIC_Configuration(void);
 void UART_Configuration(void);
+void DMA_Configuration(void);
 
 /*Delay*/
 void usDelay(uint32_t nTime);

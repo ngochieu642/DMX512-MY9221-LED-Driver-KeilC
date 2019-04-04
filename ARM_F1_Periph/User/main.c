@@ -13,6 +13,10 @@ PUTCHAR_PROTOTYPE
 }
 SysTick_typedef systick={.Systick_Counter=0};
 
+
+uint16_t uart_count=0; 
+uint8_t uart_data[1000];
+
 extern void SysTick_DelayUs(uint32_t nTime);
 extern void SysTick_DelayMs(uint32_t nTime);
 extern uint8_t dmx_receive[512];
@@ -34,7 +38,14 @@ int main(void){
 	
 	while(1){
 //			GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
-			
+//			if(uart_count > 0)
+//			{
+//				uart_count--;
+//				USART_SendData(USART1, uart_data[uart_count]);
+//				
+//			}
+		
+		msDelay(1000);	
 	}
 }
 
@@ -60,8 +71,8 @@ void RCC_Configuration(void){
 }
 void GPIO_Configuration(void){
 	GPIO_InitTypeDef GPIO_InitStructure;
-	/*PB13*/
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
+	/*PB9*/
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
@@ -131,7 +142,7 @@ void UART_Configuration(void){
 	USART_InitTypeDef USART_InitStructure;
 	
 	/*UART1*/
-	USART_InitStructure.USART_BaudRate = 19200;
+	USART_InitStructure.USART_BaudRate = 9600;
 	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
 	USART_InitStructure.USART_StopBits = USART_StopBits_1;
 	USART_InitStructure.USART_Parity = USART_Parity_No;
@@ -158,6 +169,7 @@ void UART_Configuration(void){
 	USART_Cmd(USART1,ENABLE); /*printf*/
 	USART_Cmd(USART2,ENABLE);
 }
+
 /*Delay*/
 void usDelay(uint32_t nTime){
 	uint16_t counter = nTime & 0xffff;
