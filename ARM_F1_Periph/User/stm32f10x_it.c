@@ -152,9 +152,11 @@ void USART2_IRQHandler(void){
 		count = 0;
 		USART_ClearFlag(USART2,USART_FLAG_FE);
 	}
+	
+	/*If receive Empty*/
 	while(USART_GetFlagStatus(USART2,USART_FLAG_RXNE)==RESET){}
 	
-	/*Receive not Empty data*/
+	/*Receive 'not Empty' data*/
 	data[count++]=USART_ReceiveData(USART2);
 	USART_SendData(USART1,data[count-1]);
 }
