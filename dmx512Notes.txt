@@ -1,0 +1,45 @@
+Serial (R,G,B) = (100,50,40)
+
+buffer[1000]
+
+
+
+buffer[0] = NUL
+buffer[1] = NUL
+
+BỘ 3 BYTE 1
+buffer[2] = d => 100 ASCII	=> RED ={2 ; 5 ; 8; 11; ... } 	=> RED   = 2+3(n-1) với n là số bộ byte
+buffer[3] = 2 =>  50 ASCII									=> GREEN = 3+3(n-1)
+buffer[4] = ( =>  40 ASCII									=> BLUE  = 4+3(n-1)
+
+BỘ 3 BYTE 2
+buffer[5] = d 
+buffer[6] = 2
+buffer[7] = (
+
+BỘ 3 BYTE 3
+buffer[8] = d
+buffer[9] = 2
+buffer[10]= (
+
+BỘ 3 BYTE 4
+buffer[11]= d
+buffer[12]= 2
+buffer[13]= (
+
+BỘ 3 BYTE 5
+buffer[14]= d
+buffer[15]= 2
+buffer[16]= (
+
+....
+....
+....
+BỘ 3 BYTE 12
+buffer[35]= d
+buffer[36]= 2
+buffer[37]= (
+
+BỘ 3 BYTE 13 trở đi tất cả đều = NUL
+
+Thời gian xuất SPI:
