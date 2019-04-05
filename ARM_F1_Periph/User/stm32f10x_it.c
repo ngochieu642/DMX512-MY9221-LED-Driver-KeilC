@@ -30,12 +30,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define FLAG_INACTIVE 0
-#define FLAG_ACTIVE		1
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-bool breakCondition=false, startFrame=false;
-
 /*Anh Toan code*/
 uint8_t data[600];
 uint16_t count;

@@ -18,7 +18,6 @@ uint8_t uart_data[1000];
 
 extern void SysTick_DelayUs(uint32_t nTime);
 extern void SysTick_DelayMs(uint32_t nTime);
-bool SPI_send=false;
 														
 int main(void){
 	/*Config function*/
