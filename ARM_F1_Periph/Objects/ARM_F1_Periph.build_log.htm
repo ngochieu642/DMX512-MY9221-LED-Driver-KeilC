@@ -22,12 +22,17 @@ Dialog DLL:      TARMSTM.DLL V1.66.0.0
  
 <h2>Project:</h2>
 F:\Work\SmartTec\LED_RGB\TestFunction\ARM_F1_Periph\ARM_F1_Periph.uvprojx
+<<<<<<< HEAD
 Project File Date:  03/25/2019
+=======
+Project File Date:  04/05/2019
+>>>>>>> AnhToanCode
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'F:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'ARM_F1_Periph'
 compiling main.c...
+<<<<<<< HEAD
 .\User\sparkle.h(8): warning:  #1-D: last line of file ends without a newline
   void Sparkle12Channel(uint64_t RGB_Background, int channelSpark, uint64_t RGBsparkColor);
 .\User\sparkle.h(8): warning:  #1-D: last line of file ends without a newline
@@ -55,6 +60,23 @@ linking...
 Program Size: Code=3696 RO-data=268 RW-data=20 ZI-data=1636  
 FromELF: creating hex file...
 ".\Objects\ARM_F1_Periph.axf" - 0 Error(s), 11 Warning(s).
+=======
+User\main.h(47): warning:  #1-D: last line of file ends without a newline
+  void uartAllLED(int myCode);
+User\main.c(194): warning:  #188-D: enumerated type mixed with another type
+  	GPIO_WriteBit(PORT_LED,DI,0);
+User\main.c(206): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(PORT_LED,DI,(data>>i)&1);
+User\main.c(207): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(PORT_LED,DCKI,!GPIO_ReadOutputDataBit(PORT_LED,DCKI)); //Create clock
+User\main.c(382): warning:  #1-D: last line of file ends without a newline
+  }
+User\main.c: 5 warnings, 0 errors
+linking...
+Program Size: Code=4440 RO-data=268 RW-data=52 ZI-data=2636  
+FromELF: creating hex file...
+".\Objects\ARM_F1_Periph.axf" - 0 Error(s), 5 Warning(s).
+>>>>>>> AnhToanCode
 
 <h2>Software Packages used:</h2>
 

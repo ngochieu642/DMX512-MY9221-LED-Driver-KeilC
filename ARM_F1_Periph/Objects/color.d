@@ -33,12 +33,5 @@
 .\objects\color.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\color.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\color.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\color.o: .\User\sparkle.h
-.\objects\color.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\color.o: .\User\color.h
-.\objects\color.o: .\User\color.h
-.\objects\color.o: .\User\colorRun.h
-.\objects\color.o: .\User\color.h
-.\objects\color.o: .\User\sparkle.h
-.\objects\color.o: .\User\color.h
 .\objects\color.o: User\color.h
+.\objects\color.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

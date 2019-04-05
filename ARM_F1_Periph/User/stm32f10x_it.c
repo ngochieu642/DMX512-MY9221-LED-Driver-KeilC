@@ -30,8 +30,19 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+#define FLAG_INACTIVE 0
+#define FLAG_ACTIVE		1
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+bool breakCondition=false, startFrame=false;
+
+extern uint16_t uart_count;
+extern uint8_t uart_data[1000];
+
+/*Anh Toan code*/
+uint8_t data[600];
+uint16_t count;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -135,6 +146,22 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
 }
+void USART2_IRQHandler(void){
+	if(USART_GetFlagStatus(USART2,USART_FLAG_FE)){/*If there were frame error*/
+		count = 0;
+		uart_count=0;
+		USART_ClearFlag(USART2,USART_FLAG_FE);
+	}                     
+
+	/*If receive Empty*/
+	while(USART_GetFlagStatus(USART2,USART_FLAG_RXNE)==RESET){}
+	/*Receive 'not Empty' data*/
+	{
+		uart_data[uart_count++]=USART_ReceiveData(USART2);
+	}
+}
+
+
 
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */

@@ -1,0 +1,30 @@
+Lập trình stm32
+
+1. ghi 208 bit vào thanh ghi
+2. trigger internal latch
+
+1/ghi 208 bit vào thanh ghi
+  + Chân DCKI có cạnh lên/xuống thì sẽ ghi giá trị từ chân DI
+  + Chu kì DCKI: < 14.4us => f = 1MHz
+  + sau khi ghi 208 bit thì trigger internal latch
+
+2/trigger internal latch
+  +giữ chân DCKI ở nguyên 1 mức trong T > 220us
+  +gửi đi 4 xung ở chân DI, xung này có tHigh > 70ns, tLow > 230ns
+  *Data sẽ được đem vào thanh ghi ở xung cạnh xuống thứ 2
+
+16-bit Command Data description
+[15..0]
+00000 0 00 000 0 0 0 0 0
+
+16 bit Grayscale data format
+[15..0]
+0x00ff
+
+
+thanh led gồm các bộ 6 đèn, tín hiệu sẽ được truyền liên tiếp 
+ 
+trong hàm write Level, nếu mức 0 -> ko sáng; mức 1->3 sáng 6 đèn đầu, 
+-> nếu từ 4->7: sáng 12 đèn đầu, 
+-> nếu từ 8->12: sáng 18 đèn
+

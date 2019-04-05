@@ -3,14 +3,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_tim.h"
-#include <stdbool.h>
+#include "stm32f10x_usart.h"
+#include "stm32f10x_dma.h"
 
-#include <sparkle.h>
-#include <color.h>
-#include <colorRun.h>
-
+#define PORT_LED 	GPIOA
+#define DI		GPIO_Pin_7
+#define DCKI	GPIO_Pin_5
 /*Systick*/
 typedef struct
 {
@@ -26,21 +27,21 @@ void RCC_Configuration(void);
 void GPIO_Configuration(void);
 void TIM_Configuration(void);
 void NVIC_Configuration(void);
+void UART_Configuration(void);
+void DMA_Configuration(void);
 
 /*Delay*/
 void usDelay(uint32_t nTime);
 void msDelay(uint32_t nTime);
 
-/*LED Function*/
+/*LED function*/
 void trigger_latch(void);
 void write16(uint16_t data);
 void beginWrite(void);
 void endWrite(void);
-int reverse(bool val);
-void writeLevel(uint8_t val, uint8_t brightness);
-void writeBits(uint16_t Brightness);
-void writeBytes(uint8_t param[10]);
-void writeSync(void);
 void ClearLED(void);
 void TestLED(int myCase);
-void TestLED_ALL(int Code);
+void TestLED_ALL(int myCode);
+/*UART LED*/
+void uartLED(int myCase);
+void uartAllLED(int myCode);
