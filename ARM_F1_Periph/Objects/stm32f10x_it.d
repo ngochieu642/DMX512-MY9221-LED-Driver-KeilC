@@ -34,3 +34,4 @@
 .\objects\stm32f10x_it.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\stm32f10x_it.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\stm32f10x_it.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\stm32f10x_it.o: User\softSPI_MY9221.h

@@ -27,22 +27,32 @@ Project File Date:  04/05/2019
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'F:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'ARM_F1_Periph'
-compiling main.c...
-User\main.h(47): warning:  #1-D: last line of file ends without a newline
+compiling stm32f10x_it.c...
+User\softSPI_MY9221.h(13): warning:  #1-D: last line of file ends without a newline
   void uartAllLED(int myCode);
-User\main.c(193): warning:  #188-D: enumerated type mixed with another type
+User\stm32f10x_it.c: 1 warning, 0 errors
+compiling softSPI_MY9221.c...
+User\softSPI_MY9221.h(13): warning:  #1-D: last line of file ends without a newline
+  void uartAllLED(int myCode);
+User\softSPI_MY9221.h(13): warning:  #1-D: last line of file ends without a newline
+  void uartAllLED(int myCode);
+User\softSPI_MY9221.c(6): warning:  #188-D: enumerated type mixed with another type
   	GPIO_WriteBit(PORT_LED,DI,0);
-User\main.c(205): warning:  #188-D: enumerated type mixed with another type
+User\softSPI_MY9221.c(18): warning:  #188-D: enumerated type mixed with another type
   		GPIO_WriteBit(PORT_LED,DI,(data>>i)&1);
-User\main.c(206): warning:  #188-D: enumerated type mixed with another type
+User\softSPI_MY9221.c(19): warning:  #188-D: enumerated type mixed with another type
   		GPIO_WriteBit(PORT_LED,DCKI,!GPIO_ReadOutputDataBit(PORT_LED,DCKI)); //Create clock
-User\main.c(381): warning:  #1-D: last line of file ends without a newline
+User\softSPI_MY9221.c(194): warning:  #1-D: last line of file ends without a newline
   }
-User\main.c: 5 warnings, 0 errors
+User\softSPI_MY9221.c: 6 warnings, 0 errors
+compiling main.c...
+User\softSPI_MY9221.h(13): warning:  #1-D: last line of file ends without a newline
+  void uartAllLED(int myCode);
+User\main.c: 1 warning, 0 errors
 linking...
 Program Size: Code=4440 RO-data=268 RW-data=52 ZI-data=2636  
 FromELF: creating hex file...
-".\Objects\ARM_F1_Periph.axf" - 0 Error(s), 5 Warning(s).
+".\Objects\ARM_F1_Periph.axf" - 0 Error(s), 8 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -56,7 +66,7 @@ Package Vendor: Keil
   F:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

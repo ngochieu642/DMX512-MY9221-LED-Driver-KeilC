@@ -33,3 +33,4 @@
 .\objects\main.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\main.o: User\softSPI_MY9221.h

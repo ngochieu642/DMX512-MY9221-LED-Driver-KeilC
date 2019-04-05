@@ -36,9 +36,6 @@
 /* Private variables ---------------------------------------------------------*/
 bool breakCondition=false, startFrame=false;
 
-extern uint16_t uart_count;
-extern uint8_t uart_data[1000];
-
 /*Anh Toan code*/
 uint8_t data[600];
 uint16_t count;

@@ -8,6 +8,7 @@
 #include "stm32f10x_tim.h"
 #include "stm32f10x_usart.h"
 #include "stm32f10x_dma.h"
+#include "softSPI_MY9221.h"
 
 #define PORT_LED 	GPIOA
 #define DI		GPIO_Pin_7
@@ -20,6 +21,9 @@ typedef struct
 
 extern SysTick_typedef systick;
 uint32_t System_GetTick(void);
+
+extern uint16_t uart_count;
+extern uint8_t uart_data[1000];
 
 /*Init*/
 void SysTick_Configuration(void);
@@ -34,14 +38,3 @@ void DMA_Configuration(void);
 void usDelay(uint32_t nTime);
 void msDelay(uint32_t nTime);
 
-/*LED function*/
-void trigger_latch(void);
-void write16(uint16_t data);
-void beginWrite(void);
-void endWrite(void);
-void ClearLED(void);
-void TestLED(int myCase);
-void TestLED_ALL(int myCode);
-/*UART LED*/
-void uartLED(int myCase);
-void uartAllLED(int myCode);
