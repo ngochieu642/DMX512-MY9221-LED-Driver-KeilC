@@ -32,21 +32,15 @@ int main(void){
 	NVIC_Configuration();
 	TIM_Configuration();
 	
-	msDelay(1000);
+
 	ClearLED();
 	TestLED_ALL(0);
-	//uartAllLED(0,uart_data);
-	GPIO_WriteBit(GPIOB,GPIO_Pin_9,0);
 	
 	while(1){
-//		for(int i=0;i<10;i++){
-//			USART_SendData(USART1,(char)uart_data[i]);
-//		}
-		USART_SendData(USART1,(char)uart_data[35]);
-		msDelay(100);
-		GPIO_WriteBit(GPIOB,GPIO_Pin_13,!GPIO_ReadOutputDataBit(GPIOB,GPIO_Pin_13));
-		//uartAllLED(1,uart_data);
-		TestLED_ALL(0);
+		//USART_SendData(USART1,(char)uart_data[35]);
+		ClearLED();
+		TestLED_ALL(1);
+		msDelay(0);
 	}
 }
 
@@ -72,15 +66,15 @@ void RCC_Configuration(void){
 }
 void GPIO_Configuration(void){
 	GPIO_InitTypeDef GPIO_InitStructure;
-	/*PB9*/
+	/*PB13*/
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 	
 	/*PA5 and PA7*/
-//	GPIO_InitStructure.GPIO_Pin = DI | DCKI;
-//	GPIO_Init(PORT_LED,&GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin = DI | DCKI;
+	GPIO_Init(PORT_LED,&GPIO_InitStructure);
 	
 	/*PA9-Rx PA10-Tx*/
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
@@ -302,6 +296,7 @@ void uartAllLED(int myCode,uint8_t buffer[]){
 				break;
 	}
 }
+
 void TestLED(int myCase){
 	
 	uint8_t buff0[12] ={	0x00,0x00,0x00,		
@@ -309,24 +304,25 @@ void TestLED(int myCase){
 												0x00,0x00,0x00, 	
 												0x00,0x00,0x00};
 	/*Block 1	R G B*/
-	uint8_t buff1[12] ={	0x01,0x00,0x00, 	//b	3
-												0x00,0x01,0x00,		//g 2
-												0x00,0x00,0x01, 	//r 1
+												/*B		G			R*/
+	uint8_t buff1[12] ={	0x01,0x00,0x00, 	//b	3							 3
+												0x00,0x01,0x00,		//g 2             2                                           
+												0x00,0x00,0xf1, 	//r 1            1                                                                                                                    
 												0x00,0x00,0x00};
 	/*Block 2 RG GB RB*/
-	uint8_t buff2[12] ={	0x01,0x00,0x01,		
-												0x01,0x01,0x00,		
-												0x00,0x01,0x01, 	
+	uint8_t buff2[12] ={	0x01,0x00,0x01,						//						6
+												0x01,0x01,0x00,						//					 5		
+												0x00,0x01,0x01, 					//					4	
 												0x00,0x00,0x00};
 	/*Block 3 RB GB RG*/
-	uint8_t buff3[12] ={	0x00,0x01,0x01,		
-												0x01,0x01,0x00,		
-												0x01,0x00,0x01, 	
+	uint8_t buff3[12] ={	0x00,0x01,0x01,		//									9
+												0x01,0x01,0x00,		//								 8
+												0x01,0x00,0x01, 	//								7
 												0x00,0x00,0x00};
 	/*Block 4 B G R*/
-	uint8_t buff4[12] ={	0x00,0x00,0x01,		
-												0x00,0x01,0x00,		
-												0x01,0x00,0x00, 	
+	uint8_t buff4[12] ={	0x00,0x00,0x01,		//									12
+												0x00,0x01,0x00,		//								11
+												0x01,0x00,0x00, 	//							10
 												0x00,0x00,0x00};
 	switch(myCase){
 		case 1:
@@ -366,6 +362,7 @@ void TestLED(int myCase){
 			break;}			
 	}
 }
+
 void TestLED_ALL(int myCode){
 	switch(myCode){
 		case 0:
