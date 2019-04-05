@@ -32,14 +32,9 @@ int main(void){
 	
 	ClearLED();
 	TestLED_ALL(0);
-<<<<<<< HEAD
-	//SetColorWithCode(0,0x0f0f0f);
-=======
->>>>>>> AnhToanCode
-	
+
 	while(1){
 		
-<<<<<<< HEAD
 		uint8_t buffer[12]={3,2,1,6,5,4,9,8,7,12,11,10}; /*From right to Left*/
 //		uint64_t RGB_BackGround=0x010101,RGB_RunningColor=0x00000f;
 		uint16_t frequency = 7;
@@ -59,7 +54,7 @@ int main(void){
 		
 //		}
 
-=======
+
 		/*Code for UART Board*/
 //		USART_SendData(USART1,(char)uart_data[14]);
 //		msDelay(1000);
@@ -69,7 +64,6 @@ int main(void){
 		msDelay(2);
 		ClearLED();
 		uartAllLED(1);
->>>>>>> AnhToanCode
 	}
 }
 
