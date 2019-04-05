@@ -57,8 +57,8 @@ Section Cross References
     main.o(i.main) refers to main.o(i.TIM_Configuration) for TIM_Configuration
     main.o(i.main) refers to main.o(i.ClearLED) for ClearLED
     main.o(i.main) refers to main.o(i.TestLED_ALL) for TestLED_ALL
-    main.o(i.main) refers to main.o(i.uartAllLED) for uartAllLED
     main.o(i.main) refers to main.o(i.msDelay) for msDelay
+    main.o(i.main) refers to main.o(i.uartAllLED) for uartAllLED
     main.o(i.msDelay) refers to stm32f10x_tim.o(i.TIM_Cmd) for TIM_Cmd
     main.o(i.msDelay) refers to stm32f10x_tim.o(i.TIM_SetCounter) for TIM_SetCounter
     main.o(i.msDelay) refers to stm32f10x_tim.o(i.TIM_GetCounter) for TIM_GetCounter

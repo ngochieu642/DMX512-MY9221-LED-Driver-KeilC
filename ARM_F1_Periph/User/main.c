@@ -37,13 +37,12 @@ int main(void){
 		
 		/*Code for UART Board*/
 //		USART_SendData(USART1,(char)uart_data[14]);
-//		msDelay(100);
+		msDelay(2);
 		
 		/*Code for LED Bar Board*/
 		ClearLED();
 		//TestLED_ALL(1);
 		uartAllLED(1);
-		msDelay(0);
 	}
 }
 
