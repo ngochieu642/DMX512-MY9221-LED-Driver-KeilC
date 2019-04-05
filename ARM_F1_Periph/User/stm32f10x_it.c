@@ -34,8 +34,6 @@
 #define FLAG_ACTIVE		1
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-uint8_t dmx_receive[512];
-uint16_t dmx_counter=0;
 bool breakCondition=false, startFrame=false;
 
 extern uint16_t uart_count;
@@ -160,8 +158,6 @@ void USART2_IRQHandler(void){
 	/*Receive 'not Empty' data*/
 	{
 		uart_data[uart_count++]=USART_ReceiveData(USART2);
-//		USART_SendData(USART1,(char)(242));
-//		USART_SendData(USART1,(char)(uart_data[uart_count-1]));
 	}
 }
 

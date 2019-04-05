@@ -29,18 +29,18 @@ Project File Date:  04/05/2019
 Build target 'ARM_F1_Periph'
 compiling main.c...
 User\main.h(47): warning:  #1-D: last line of file ends without a newline
-  void uartAllLED(int myCode,uint8_t buffer[]);
-User\main.c(192): warning:  #188-D: enumerated type mixed with another type
+  void uartAllLED(int myCode);
+User\main.c(195): warning:  #188-D: enumerated type mixed with another type
   	GPIO_WriteBit(PORT_LED,DI,0);
-User\main.c(204): warning:  #188-D: enumerated type mixed with another type
+User\main.c(207): warning:  #188-D: enumerated type mixed with another type
   		GPIO_WriteBit(PORT_LED,DI,(data>>i)&1);
-User\main.c(205): warning:  #188-D: enumerated type mixed with another type
+User\main.c(208): warning:  #188-D: enumerated type mixed with another type
   		GPIO_WriteBit(PORT_LED,DCKI,!GPIO_ReadOutputDataBit(PORT_LED,DCKI)); //Create clock
-User\main.c(380): warning:  #1-D: last line of file ends without a newline
+User\main.c(383): warning:  #1-D: last line of file ends without a newline
   }
 User\main.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=3872 RO-data=268 RW-data=56 ZI-data=2632  
+Program Size: Code=4440 RO-data=268 RW-data=52 ZI-data=2636  
 FromELF: creating hex file...
 ".\Objects\ARM_F1_Periph.axf" - 0 Error(s), 5 Warning(s).
 

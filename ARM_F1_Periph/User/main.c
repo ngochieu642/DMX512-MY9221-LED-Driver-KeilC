@@ -18,8 +18,6 @@ uint8_t uart_data[1000];
 
 extern void SysTick_DelayUs(uint32_t nTime);
 extern void SysTick_DelayMs(uint32_t nTime);
-extern uint8_t dmx_receive[512];
-extern uint16_t dmx_counter;
 bool SPI_send=false;
 														
 int main(void){
@@ -32,15 +30,19 @@ int main(void){
 	NVIC_Configuration();
 	TIM_Configuration();
 	
-
 	ClearLED();
 	TestLED_ALL(0);
 	
 	while(1){
-		//USART_SendData(USART1,(char)uart_data[35]);
+		
+		/*Code for UART Board*/
+//		USART_SendData(USART1,(char)uart_data[14]);
+//		msDelay(100);
+		
+		/*Code for LED Bar Board*/
 		ClearLED();
-		TestLED_ALL(1);
-		//uartAllLED(1,uart_data);
+		//TestLED_ALL(1);
+		uartAllLED(1);
 		msDelay(0);
 	}
 }
@@ -219,30 +221,30 @@ void ClearLED(void){
 		}
 		endWrite();
 }
-void uartLED(uint8_t buffer[], int myCase){
+void uartLED(int myCase){
 	uint8_t buff0[12] ={	0x00,0x00,0x00,		
 												0x00,0x00,0x00,		
 												0x00,0x00,0x00, 	
 												0x00,0x00,0x00};
 	/*Block 1*/
-	uint8_t buff1[12] ={	buffer[10],buffer[9],buffer[8], 		//3
-												buffer[7],buffer[6],buffer[5],			//2
-												buffer[4],buffer[3],buffer[2], 			//1
+	uint8_t buff1[12] ={	uart_data[10],uart_data[9],uart_data[8], 		//3
+												uart_data[7] ,uart_data[6],uart_data[5],			//2
+												uart_data[4] ,uart_data[3],uart_data[2], 			//1
 												0x00,0x00,0x00};
 	/*Block 2*/
-	uint8_t buff2[12] ={	buffer[19],buffer[18],buffer[17], 	//6
-												buffer[16],buffer[15],buffer[14],		//5
-												buffer[13],buffer[12],buffer[11], 	//4
+	uint8_t buff2[12] ={	uart_data[19],uart_data[18],uart_data[17], 	//6
+												uart_data[16],uart_data[15],uart_data[14],		//5
+												uart_data[13],uart_data[12],uart_data[11], 	//4
 												0x00,0x00,0x00};
 	/*Block 3*/
-	uint8_t buff3[12] ={	buffer[28],buffer[27],buffer[26], 	//9
-												buffer[25],buffer[24],buffer[23],		//8
-												buffer[22],buffer[21],buffer[20], 	//7
+	uint8_t buff3[12] ={	uart_data[28],uart_data[27],uart_data[26], 	//9
+												uart_data[25],uart_data[24],uart_data[23],		//8
+												uart_data[22],uart_data[21],uart_data[20], 	//7
 												0x00,0x00,0x00};
 	/*Block 4*/
-	uint8_t buff4[12] ={	buffer[37],buffer[36],buffer[35], 	//12	
-												buffer[34],buffer[33],buffer[32],		//11
-												buffer[31],buffer[30],buffer[29], 	//10
+	uint8_t buff4[12] ={	uart_data[37],uart_data[36],uart_data[35], 	//12	
+												uart_data[34],uart_data[33],uart_data[32],		//11
+												uart_data[31],uart_data[30],uart_data[29], 	//10
 												0x00,0x00,0x00};
 	
 		switch(myCase){
@@ -283,17 +285,17 @@ void uartLED(uint8_t buffer[], int myCase){
 			break;}			
 	}										
 }
-void uartAllLED(int myCode,uint8_t buffer[]){
+void uartAllLED(int myCode){
 	switch(myCode){
 		case 0:
 			for(int i=0;i<4;i++)
-				uartLED(buffer,0);
+				uartLED(0);
 				break;
 		default:
-				uartLED(buffer,1);
-				uartLED(buffer,2);
-				uartLED(buffer,3);
-				uartLED(buffer,4);
+				uartLED(1);
+				uartLED(2);
+				uartLED(3);
+				uartLED(4);
 				break;
 	}
 }
