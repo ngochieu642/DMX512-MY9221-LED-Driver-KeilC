@@ -15,6 +15,7 @@ SysTick_typedef systick={.Systick_Counter=0};
 
 uint16_t uart_count=0; 
 uint8_t uart_data[1000];
+int doneSend=0;
 
 extern void SysTick_DelayUs(uint32_t nTime);
 extern void SysTick_DelayMs(uint32_t nTime);
@@ -31,18 +32,16 @@ int main(void){
 	
 	ClearLED();
 	TestLED_ALL(0);
-
+	
+	TestLED2();
 	while(1){
 		/*Code for UART Board*/
 //		USART_SendData(USART1,(char)uart_data[14]);
 //		msDelay(1000);
-		
-		
 		/*Code for LED Bar Board*/
-		msDelay(2);
-		ClearLED();
-		uartAllLED(1);
-//		TestLED_ALL(1);
+//		ClearLED();
+//		uartAllLED(1);
+
 	}
 }
 

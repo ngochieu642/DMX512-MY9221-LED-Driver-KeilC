@@ -24,6 +24,7 @@ uint32_t System_GetTick(void);
 
 extern uint16_t uart_count;
 extern uint8_t uart_data[1000];
+extern int doneSend;
 
 /*Init*/
 void SysTick_Configuration(void);
