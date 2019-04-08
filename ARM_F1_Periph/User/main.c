@@ -41,7 +41,8 @@ int main(void){
 		/*Code for LED Bar Board*/
 		msDelay(2);
 		ClearLED();
-		uartAllLED(1);
+//		uartAllLED(1);
+		TestLED_ALL(1);
 	}
 }
 
@@ -101,7 +102,7 @@ void SysTick_Configuration(void){
 void TIM_Configuration(void){
 	TIM_TimeBaseInitTypeDef TIM_InitStructure;
 	/*
-	TIM2 freq is 1Hz
+	TIM2 freq is 1Hz => count to 1000 = 1s
 	Freq = 1Hz = 1s = 1000ms => choose TIM_Periodd = 1000 -1;
 	*/
 	TIM_DeInit(TIM2);
@@ -113,10 +114,10 @@ void TIM_Configuration(void){
 	TIM_TimeBaseInit(TIM2,&TIM_InitStructure);
 	TIM_ITConfig(TIM2,TIM_IT_CC1,ENABLE); /*Tim IT Enable*/
 	
-	/*TIM3 freq = 1000 Hz*/
+	/*TIM3 freq = 1000 Hz -> count to 1000 = 1 ms*/
 	TIM_DeInit(TIM3);
 	TIM_InitStructure.TIM_Prescaler = 63;
-	TIM_InitStructure.TIM_Period = 1000;
+	TIM_InitStructure.TIM_Period = 999;
 	TIM_TimeBaseInit(TIM3, &TIM_InitStructure);
 	TIM_ITConfig(TIM3,TIM_IT_CC2,ENABLE);
 	

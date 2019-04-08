@@ -39,25 +39,25 @@ void uartLED(int myCase){
 												0x00,0x00,0x00, 	
 												0x00,0x00,0x00};
 	/*Block 1*/
-	uint8_t buff1[12] ={	uart_data[10],uart_data[9],uart_data[8], 		//3
+	uint8_t buff1[12] ={	uart_data[10],uart_data[9],uart_data[8], 			//3
 												uart_data[7] ,uart_data[6],uart_data[5],			//2
 												uart_data[4] ,uart_data[3],uart_data[2], 			//1
 												0x00,0x00,0x00};
 	/*Block 2*/
-	uint8_t buff2[12] ={	uart_data[19],uart_data[18],uart_data[17], 	//6
+	uint8_t buff2[12] ={	uart_data[19],uart_data[18],uart_data[17], 		//6
 												uart_data[16],uart_data[15],uart_data[14],		//5
-												uart_data[13],uart_data[12],uart_data[11], 	//4
+												uart_data[13],uart_data[12],uart_data[11], 		//4
 												0x00,0x00,0x00};
 	/*Block 3*/
-	uint8_t buff3[12] ={	uart_data[28],uart_data[27],uart_data[26], 	//9
+	uint8_t buff3[12] ={	uart_data[28],uart_data[27],uart_data[26], 		//9
 												uart_data[25],uart_data[24],uart_data[23],		//8
-												uart_data[22],uart_data[21],uart_data[20], 	//7
+												uart_data[22],uart_data[21],uart_data[20], 		//7
 												0x00,0x00,0x00};
 	/*Block 4*/
-	uint8_t buff4[12] ={	uart_data[37],uart_data[36],uart_data[35], 	//12	
+	uint8_t buff4[12] ={	uart_data[37],uart_data[36],uart_data[35], 		//12	
 												uart_data[34],uart_data[33],uart_data[32],		//11
-												uart_data[31],uart_data[30],uart_data[29], 	//10
-												0x00,0x00,0x00};
+												uart_data[31],uart_data[30],uart_data[29], 		//10
+												0x00,0x00,0x00};	
 	
 		switch(myCase){
 		case 1:
@@ -120,9 +120,9 @@ void TestLED(int myCase){
 												0x00,0x00,0x00};
 	/*Block 1	R G B*/
 												/*B		G			R*/
-	uint8_t buff1[12] ={	0x01,0x00,0x00, 	//b	3							 3
+	uint8_t buff1[12] ={	0xff,0x00,0x00, 	//b	3							 3
 												0x00,0x01,0x00,		//g 2             2                                           
-												0x00,0x00,0x01, 	//r 1            1                                                                                                                    
+												0x00,0x00,0xff, 	//r 1            1                                                                                                                    
 												0x00,0x00,0x00};
 	/*Block 2 RG GB RB*/
 	uint8_t buff2[12] ={	0x01,0x00,0x01,						//						6
