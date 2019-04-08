@@ -38,3 +38,4 @@ void DMA_Configuration(void);
 void usDelay(uint32_t nTime);
 void msDelay(uint32_t nTime);
 
+/*Develop function*/

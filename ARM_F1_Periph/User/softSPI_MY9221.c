@@ -71,16 +71,28 @@ void uartLED(int myCase){
 	
 		switch(myCase){
 		case 1:
-			writeBuff16(buff1);
+			beginWrite();
+			for(int i=0;i<12;i++)
+			write16(buff1[i]);
+			endWrite();
 			break;
 		case 2:
-			writeBuff16(buff2);
+			beginWrite();
+			for(int i=0;i<12;i++)
+			write16(buff2[i]);
+			endWrite();
 			break;
 		case 3:
-			writeBuff16(buff3);
+			beginWrite();
+			for(int i=0;i<12;i++)
+			write16(buff3[i]);
+			endWrite();
 			break;
 		case 4:
-			writeBuff16(buff4);
+			beginWrite();
+			for(int i=0;i<12;i++)
+			write16(buff4[i]);
+			endWrite();
 			break;
 		default:{
 			beginWrite();
@@ -89,8 +101,6 @@ void uartLED(int myCase){
 			}
 			endWrite();
 			break;
-//			writeBuff16(buff0);
-//			break;
 		}			
 	}										
 }
@@ -111,6 +121,34 @@ void uartAllLED(int myCode){
 
 void TestLED(int myCase){
 	
+	/*Color case*/
+//	uint8_t buff0[12] ={	0x00,0x00,0x00,		
+//												0x00,0x00,0x00,		
+//												0x00,0x00,0x00, 	
+//												0x00,0x00,0x00};
+//	/*Block 1	R G B*/
+//												/*B		G			R*/
+//	uint8_t buff1[12] ={	0xff,0x00,0x00, 	//b	3							 3
+//												0x00,0x01,0x00,		//g 2             2                                           
+//												0x00,0x00,0xff, 	//r 1            1                                                                                                                    
+//												0x00,0x00,0x00};
+//	/*Block 2 RG GB RB*/
+//	uint8_t buff2[12] ={	0x01,0x00,0x01,						//						6
+//												0x01,0x01,0x00,						//					 5		
+//												0x00,0x01,0x01, 					//					4	
+//												0x00,0x00,0x00};
+//	/*Block 3 RB GB RG*/
+//	uint8_t buff3[12] ={	0x00,0x01,0x01,		//									9
+//												0x01,0x01,0x00,		//								 8
+//												0x01,0x00,0x01, 	//								7
+//												0x00,0x00,0x00};
+//	/*Block 4 B G R*/
+//	uint8_t buff4[12] ={	0x00,0x00,0x01,		//									12
+//												0x00,0x01,0x00,		//								11
+//												0x01,0x00,0x00, 	//							10
+//												0x00,0x00,0x00};
+//	
+	/*Empty case*/
 	uint8_t buff0[12] ={	0x00,0x00,0x00,		
 												0x00,0x00,0x00,		
 												0x00,0x00,0x00, 	
@@ -118,24 +156,26 @@ void TestLED(int myCase){
 	/*Block 1	R G B*/
 												/*B		G			R*/
 	uint8_t buff1[12] ={	0xff,0x00,0x00, 	//b	3							 3
-												0x00,0x01,0x00,		//g 2             2                                           
+												0x00,0xff,0x00,		//g 2             2                                           
 												0x00,0x00,0xff, 	//r 1            1                                                                                                                    
 												0x00,0x00,0x00};
 	/*Block 2 RG GB RB*/
-	uint8_t buff2[12] ={	0x01,0x00,0x01,						//						6
-												0x01,0x01,0x00,						//					 5		
-												0x00,0x01,0x01, 					//					4	
+	uint8_t buff2[12] ={	0x00,0x00,0x00,						//						6
+												0x00,0x00,0x00,						//					 5		
+												0x00,0x00,0x00, 					//					4	
 												0x00,0x00,0x00};
 	/*Block 3 RB GB RG*/
-	uint8_t buff3[12] ={	0x00,0x01,0x01,		//									9
-												0x01,0x01,0x00,		//								 8
-												0x01,0x00,0x01, 	//								7
+	uint8_t buff3[12] ={	0x00,0x00,0x00,		//									9
+												0x00,0x00,0x00,		//								 8
+												0x00,0x00,0x00, 	//								7
 												0x00,0x00,0x00};
 	/*Block 4 B G R*/
-	uint8_t buff4[12] ={	0x00,0x00,0x01,		//									12
-												0x00,0x01,0x00,		//								11
-												0x01,0x00,0x00, 	//							10
+	uint8_t buff4[12] ={	0x00,0x00,0x00,		//									12
+												0x00,0x00,0x00,		//								11
+												0x00,0x00,0x00, 	//							10
 												0x00,0x00,0x00};
+	
+												
 	switch(myCase){
 		case 1:
 			beginWrite();
@@ -183,9 +223,9 @@ void TestLED_ALL(int myCode){
 			break;
 		default:
 			TestLED(1);
-			TestLED(2);
-			TestLED(3);
-			TestLED(4);
+//			TestLED(2);
+//			TestLED(3);
+//			TestLED(4);
 			break;
 	}
 }
