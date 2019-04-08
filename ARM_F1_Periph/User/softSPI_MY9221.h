@@ -11,6 +11,8 @@ void TestLED(int myCase);
 void TestLED_ALL(int myCode);
 void TestLED2(void);
 void ClearLEDFull(void);
+
 /*UART LED*/
 void uartLED(int myCase);
 void uartAllLED(int myCode);
+void uarrAllLED2(void);

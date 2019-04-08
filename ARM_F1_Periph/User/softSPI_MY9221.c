@@ -7,10 +7,10 @@ void trigger_latch(void){/*do the trigger work*/
 	msDelay(1);
 	for(int i=0;i<4;i++){
 		GPIO_SetBits(PORT_LED,DI);
-		usDelay(250);
+		usDelay(70);
 		GPIO_ResetBits(PORT_LED,DI);
-		usDelay(250);
-		
+		usDelay(230);
+	usDelay(230);
 	}
 }
 void write16(uint16_t data){/*send 16 bit*/
@@ -244,22 +244,23 @@ void TestLED2(void){
 	/*
 	This function used to test LED color in while loop
 	*/
-	ClearLED();
+	static uint8_t count=0;
 	
-	doneSend=0;
+	ClearLEDFull();
+	
 	beginWrite(); 				//16 bits
 	/*This channel will be push first, the final block will receive this*/
 	write16(0xff); /*C0 - 16 bit- Blue*/ 
-	write16(0x00); /*B0 - 16 bit- Green*/
+	write16(0x00); /*B0 - 16 bit- Green*/							//	3
 	write16(0x00); /*A0 - 16 bit- Red*/					
 	
-	write16(0x00); /*C1 - 16 bit- Blue*/
-	write16(0xff); /*B1 - 16 bit- Green*/
+	write16(0xff); /*C1 - 16 bit- Blue*/							//	2
+	write16(0x00); /*B1 - 16 bit- Green*/
 	write16(0x00); /*A1 - 16 bit- Red*/												
 	
-	write16(0x00); /*C2 - 16 bit- Blue*/
-	write16(0x00); /*B2 - 16 bit- Green*/
-	write16(0xff); /*A2 - 16 bit- Red*/				
+	write16(0xff); /*C2 - 16 bit- Blue*/
+	write16(0x00); /*B2 - 16 bit- Green*/							//	1
+	write16(0x00); /*A2 - 16 bit- Red*/				
 	/*Always Zero because this channel is not included in design*/
 	write16(0x00); /*C3 - 16 bit- Blue*/
 	write16(0x00); /*B3 - 16 bit- Green*/
@@ -268,35 +269,16 @@ void TestLED2(void){
 	
 
 	beginWrite(); 				//16 bits
-	write16(0x00); /*C0 - 16 bit- Blue*/
-	write16(0x00); /*B0 - 16 bit- Green*/
-	write16(0xff); /*A0 - 16 bit- Red*/			
+	write16(0xff); /*C0 - 16 bit- Blue*/
+	write16(0x00); /*B0 - 16 bit- Green*/							// 6
+	write16(count++); /*A0 - 16 bit- Red*/								
 	
-	write16(0x00); /*C1 - 16 bit- Blue*/
-	write16(0x00); /*B1 - 16 bit- Green*/
+	write16(0xff); /*C1 - 16 bit- Blue*/
+	write16(0x00); /*B1 - 16 bit- Green*/							// 5
 	write16(0x00); /*A1 - 16 bit- Red*/			
 	
-	write16(0x00); /*C2 - 16 bit- Blue*/
-	write16(0x00); /*B2 - 16 bit- Green*/
-	write16(0x00); /*A2 - 16 bit- Red*/				
-	/*Always Zero because this channel is not included in design*/
-	write16(0x00); /*C3 - 16 bit- Blue*/
-	write16(0x00); /*B3 - 16 bit- Green*/
-	write16(0x00); /*A3 - 16 bit- Red*/
-	trigger_latch();		
-	
-	
-	beginWrite(); 				//16 bits
-	write16(0xff); /*C0 - 16 bit- Blue*/
-	write16(0x00); /*B0 - 16 bit- Green*/
-	write16(0x00); /*A0 - 16 bit- Red*/			
-	
-	write16(0x00); /*C1 - 16 bit- Blue*/
-	write16(0x00); /*B1 - 16 bit- Green*/
-	write16(0x00); /*A1 - 16 bit- Red*/				
-	
-	write16(0x00); /*C2 - 16 bit- Blue*/
-	write16(0x00); /*B2 - 16 bit- Green*/
+	write16(0xff); /*C2 - 16 bit- Blue*/
+	write16(0x00); /*B2 - 16 bit- Green*/							// 4
 	write16(0x00); /*A2 - 16 bit- Red*/				
 	/*Always Zero because this channel is not included in design*/
 	write16(0x00); /*C3 - 16 bit- Blue*/
@@ -307,20 +289,38 @@ void TestLED2(void){
 	
 	beginWrite(); 				//16 bits
 	write16(0x00); /*C0 - 16 bit- Blue*/
-	write16(0x00); /*B0 - 16 bit- Green*/
+	write16(0x00); /*B0 - 16 bit- Green*/							// 9
 	write16(0xff); /*A0 - 16 bit- Red*/			
 	
 	write16(0x00); /*C1 - 16 bit- Blue*/
-	write16(0x00); /*B1 - 16 bit- Green*/
-	write16(0x00); /*A1 - 16 bit- Red*/				
+	write16(0x00); /*B1 - 16 bit- Green*/							// 8
+	write16(0xff); /*A1 - 16 bit- Red*/				
 	
 	write16(0x00); /*C2 - 16 bit- Blue*/
-	write16(0x00); /*B2 - 16 bit- Green*/
-	write16(0x00); /*A2 - 16 bit- Red*/				
+	write16(0x00); /*B2 - 16 bit- Green*/							// 7
+	write16(0xff); /*A2 - 16 bit- Red*/				
+	/*Always Zero because this channel is not included in design*/
+	write16(0x00); /*C3 - 16 bit- Blue*/
+	write16(0x00); /*B3 - 16 bit- Green*/
+	write16(0x00); /*A3 - 16 bit- Red*/
+	trigger_latch();		
+	
+	
+	beginWrite(); 				//16 bits
+	write16(0x00); /*C0 - 16 bit- Blue*/
+	write16(0x00); /*B0 - 16 bit- Green*/							// 12
+	write16(0xff); /*A0 - 16 bit- Red*/			
+	
+	write16(0x00); /*C1 - 16 bit- Blue*/
+	write16(0x00); /*B1 - 16 bit- Green*/							// 11
+	write16(0xff); /*A1 - 16 bit- Red*/				
+	
+	write16(0x00); /*C2 - 16 bit- Blue*/
+	write16(0x00); /*B2 - 16 bit- Green*/							// 10
+	write16(0xff); /*A2 - 16 bit- Red*/				
 	/*Always Zero because this channel is not included in design*/
 	write16(0x00); /*C3 - 16 bit- Blue*/
 	write16(0x00); /*B3 - 16 bit- Green*/
 	write16(0x00); /*A3 - 16 bit- Red*/
 	trigger_latch();	
-	doneSend=1;
 }

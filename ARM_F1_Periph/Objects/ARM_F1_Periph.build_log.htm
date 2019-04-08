@@ -27,16 +27,24 @@ Project File Date:  04/05/2019
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'F:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'ARM_F1_Periph'
-compiling main.c...
-User\softSPI_MY9221.h(16): warning:  #1-D: last line of file ends without a newline
-  void uartAllLED(int myCode);
-User\main.h(42): warning:  #1-D: last line of file ends without a newline
+compiling softSPI_MY9221.c...
+User\softSPI_MY9221.h(18): warning:  #1-D: last line of file ends without a newline
+  void uarrAllLED2(void);
+User\softSPI_MY9221.h(18): warning:  #1-D: last line of file ends without a newline
+  void uarrAllLED2(void);
+User\main.h(41): warning:  #1-D: last line of file ends without a newline
   /*Develop function*/
-User\main.c: 2 warnings, 0 errors
+User\softSPI_MY9221.c(6): warning:  #188-D: enumerated type mixed with another type
+  	GPIO_WriteBit(PORT_LED,DI,0);
+User\softSPI_MY9221.c(19): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(PORT_LED,DI,(data>>i)&1);
+User\softSPI_MY9221.c(20): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(PORT_LED,DCKI,!GPIO_ReadOutputDataBit(PORT_LED,DCKI)); //Create clock
+User\softSPI_MY9221.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=4164 RO-data=268 RW-data=56 ZI-data=2632  
+Program Size: Code=4220 RO-data=268 RW-data=56 ZI-data=2632  
 FromELF: creating hex file...
-".\Objects\ARM_F1_Periph.axf" - 0 Error(s), 2 Warning(s).
+".\Objects\ARM_F1_Periph.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 
