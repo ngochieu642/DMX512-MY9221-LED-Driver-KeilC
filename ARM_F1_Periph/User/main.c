@@ -41,8 +41,8 @@ int main(void){
 		/*Code for LED Bar Board*/
 		msDelay(2);
 		ClearLED();
-//		uartAllLED(1);
-		TestLED_ALL(1);
+		uartAllLED(1);
+//		TestLED_ALL(1);
 	}
 }
 

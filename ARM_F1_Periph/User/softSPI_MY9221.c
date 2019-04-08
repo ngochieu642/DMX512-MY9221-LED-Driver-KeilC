@@ -25,6 +25,16 @@ void beginWrite(void){/*write 16 command bit*/
 void endWrite(void){
 	trigger_latch();
 }
+void writeBuff16(uint8_t buff[12]){
+	uint8_t buffTemp[12] ={	buff[10],buff[9],buff[8], 			//3
+													buff[7] ,buff[6],buff[5],				//2
+													buff[4] ,buff[3],buff[2], 			//1
+													0x00,0x00,0x00};
+	beginWrite();
+	for(int i=0;i<12;i++)
+		write16(buffTemp[i]);
+	endWrite();
+}
 void ClearLED(void){
 		uint8_t myBuff[12] ={0x000,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, 0x00,0x00,0x00}; 
 		beginWrite();
@@ -61,32 +71,16 @@ void uartLED(int myCase){
 	
 		switch(myCase){
 		case 1:
-			beginWrite();
-			for(int i=0;i<12;i++){
-			write16(buff1[i]);
-			}
-			endWrite();
+			writeBuff16(buff1);
 			break;
 		case 2:
-			beginWrite();
-			for(int i=0;i<12;i++){
-			write16(buff2[i]);
-			}
-			endWrite();
+			writeBuff16(buff2);
 			break;
 		case 3:
-			beginWrite();
-			for(int i=0;i<12;i++){
-			write16(buff3[i]);
-			}
-			endWrite();
+			writeBuff16(buff3);
 			break;
 		case 4:
-			beginWrite();
-			for(int i=0;i<12;i++){
-			write16(buff4[i]);
-			}
-			endWrite();
+			writeBuff16(buff4);
 			break;
 		default:{
 			beginWrite();
@@ -94,7 +88,10 @@ void uartLED(int myCase){
 			write16(buff0[i]);
 			}
 			endWrite();
-			break;}			
+			break;
+//			writeBuff16(buff0);
+//			break;
+		}			
 	}										
 }
 void uartAllLED(int myCode){
