@@ -25,27 +25,20 @@ int main(void){
 	RCC_Configuration();
 	SysTick_Configuration();
 	GPIO_Configuration();
-	
 	UART_Configuration();
 	NVIC_Configuration();
 	TIM_Configuration();
-	
+
 	ClearLED();
-	TestLED_ALL(0);
-	
-	TestLED2();
+
 	while(1){
 		/*Code for UART Board*/
 //		USART_SendData(USART1,(char)uart_data[14]);
 //		msDelay(1000);
 		
-		
 		/*Code for LED Bar Board*/
-//		ClearLED();
-//		uartAllLED(1);
-//		ClearLED();
-		//TestLED2();
-		msDelay(50);
+		uartAllLED();
+		msDelay(2);
 	}
 }
 
@@ -123,7 +116,6 @@ void TIM_Configuration(void){
 	TIM_InitStructure.TIM_Period = 999;
 	TIM_TimeBaseInit(TIM3, &TIM_InitStructure);
 	TIM_ITConfig(TIM3,TIM_IT_CC2,ENABLE);
-	
 }
 void NVIC_Configuration(void){
 	NVIC_InitTypeDef NVIC_InitStructure;
